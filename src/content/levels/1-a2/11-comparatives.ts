@@ -1,0 +1,211 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'a2-11',
+  level: 'A2',
+  title: 'Day 11: Which library is better?',
+  grammar: 'Сравнительная и превосходная степень',
+  scene: 'Команда выбирает библиотеку карт для новой фичи.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: choosing a library',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Tech discussion',
+          format: 'call',
+          lines: [
+            { who: 'Arjun', text: 'We have three options for the map: Leaflet, Mapbox and Google Maps. Which one is the best for us?' },
+            { who: 'You', text: 'I tried all three yesterday. Leaflet is the smallest and the easiest to start with.' },
+            { who: 'Arjun', text: 'But is it as fast as Mapbox with a lot of markers?' },
+            { who: 'You', text: "No, it isn't. Mapbox is faster with big data, and its maps look nicer. But it's more expensive than Leaflet." },
+            { who: 'Tom', text: 'What about Google Maps? Customers know it better than the others.' },
+            { who: 'Arjun', text: 'Google Maps is the most expensive option, and the API is more complicated.' },
+            { who: 'Sofia', text: 'For design, Mapbox is the most flexible. We can change the colours easily.' },
+            { who: 'You', text: "So: Leaflet is cheaper and simpler, Mapbox is faster and prettier. Google is the most popular, but it's the worst for our budget." },
+            { who: 'Maya', text: "Good summary. Let's try Mapbox. If it's too expensive, Leaflet is our plan B." },
+          ],
+        },
+        { kind: 'choice', prompt: 'Which library is the smallest?', options: ['Leaflet', 'Mapbox', 'Google Maps', 'All are the same'], answer: 0 },
+        { kind: 'choice', prompt: 'Which one is faster with a lot of markers?', options: ['Leaflet', 'Mapbox', 'Google Maps', 'Nobody knows'], answer: 1 },
+        { kind: 'choice', prompt: 'Which one is the most expensive?', options: ['Leaflet', 'Mapbox', 'Google Maps', 'They are free'], answer: 2 },
+        { kind: 'choice', prompt: 'What is the decision?', options: ['Google Maps', 'Try Mapbox, Leaflet is plan B', 'Leaflet only', 'Build their own map'], answer: 1 },
+        { kind: 'choice', prompt: 'Why does Sofia like Mapbox?', options: ["It's the cheapest.", "It's the most flexible for design.", "It's the oldest.", 'Customers know it.'], answer: 1 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: comparing',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'Как образуются степени сравнения',
+          body:
+            '**Короткие прилагательные** (1 слог): **-er / the -est**: *fast → faster → the fastest*, *small → smaller → the smallest*.\nПравописание: *big → bigger* (удвоение), *nice → nicer*, *easy → easier → the easiest* (y → i).\n\n' +
+            '**Длинные прилагательные** (2+ слога): **more / the most**: *expensive → more expensive → the most expensive*, *complicated → more complicated*.\n\n' +
+            '**Неправильные**: *good → better → the best*, *bad → worse → the worst*, *far → further → the furthest*, *much / many → more → the most*, *little → less → the least*.\n\n' +
+            'Сравниваем через **than**: *Mapbox is faster than Leaflet.* Превосходная степень идёт с **the**: *the best option*.',
+          table: [
+            ['Прилагательное', 'Сравнительная', 'Превосходная'],
+            ['fast', 'faster than', 'the fastest'],
+            ['big', 'bigger than', 'the biggest'],
+            ['easy', 'easier than', 'the easiest'],
+            ['expensive', 'more expensive than', 'the most expensive'],
+            ['good', 'better than', 'the best'],
+            ['bad', 'worse than', 'the worst'],
+          ],
+          pitfalls: [
+            { wrong: 'more fast', right: 'faster' },
+            { wrong: 'more better', right: 'better', note: 'Двойное сравнение — ошибка.' },
+            { wrong: 'expensiver', right: 'more expensive' },
+            { wrong: 'faster that Leaflet', right: 'faster than Leaflet' },
+            { wrong: 'It is best option.', right: 'It is the best option.' },
+          ],
+        },
+        {
+          kind: 'theory',
+          title: 'as … as, not as … as',
+          body:
+            '**as + прилагательное + as** значит «такой же, как»: *Leaflet is as stable as Mapbox.*\n**not as … as** значит «не такой, как», то есть «менее»: *Leaflet isn’t as fast as Mapbox* (= Mapbox быстрее).\n\n' +
+            'Усилители перед сравнительной степенью: *much faster, a bit cheaper, a lot more complicated*. А *very* со сравнительной степенью не используют: не *very faster*.',
+          examples: ["Leaflet isn't as fast as Mapbox.", 'Mapbox is much faster with big data.', "Google Maps is a bit more popular, but it's a lot more expensive."],
+        },
+        { kind: 'choice', prompt: 'Mapbox is ___ than Leaflet with big data.', options: ['fast', 'faster', 'more fast', 'fastest'], answer: 1 },
+        { kind: 'choice', prompt: 'Google Maps is the ___ option.', options: ['expensivest', 'more expensive', 'most expensive', 'much expensive'], answer: 2 },
+        { kind: 'choice', prompt: 'This solution is ___ than the old one.', options: ['gooder', 'more good', 'better', 'best'], answer: 2 },
+        { kind: 'choice', prompt: 'That was the ___ release of the year. Everything broke.', options: ['baddest', 'worse', 'worst', 'most bad'], answer: 2 },
+        { kind: 'choice', prompt: "Leaflet isn't ___ fast ___ Mapbox.", options: ['so / that', 'as / as', 'more / than', 'as / than'], answer: 1 },
+        { kind: 'choice', prompt: 'The new API is ___ faster.', options: ['very', 'much', 'more', 'most'], answer: 1 },
+        { kind: 'choice', prompt: 'Which framework is ___ to learn?', options: ['the easiest', 'the most easy', 'easyer', 'the easyest'], answer: 0 },
+        { kind: 'gap', text: 'Leaflet is ___ (small) than Mapbox.', answers: ['smaller'] },
+        { kind: 'gap', text: 'This query is ___ (slow) than yesterday.', answers: ['slower'] },
+        { kind: 'gap', text: 'Our new server is much ___ (big).', answers: ['bigger'] },
+        { kind: 'gap', text: 'Kotlin is ___ (easy) to read than Java for me.', answers: ['easier'] },
+        { kind: 'gap', text: 'The new design is ___ (flexible) than the old one.', answers: ['more flexible'] },
+        { kind: 'gap', text: 'Arjun writes the ___ (good) code reviews in our team.', answers: ['best'] },
+        { kind: 'gap', text: 'The bug is ___ (bad) than we thought.', answers: ['worse'] },
+        { kind: 'gap', text: 'Mapbox is faster ___ Leaflet.', answers: ['than'] },
+        { kind: 'transform', instruction: 'Перепиши через not as … as', source: 'Mapbox is faster than Leaflet.', answers: ["Leaflet isn't as fast as Mapbox.", 'Leaflet is not as fast as Mapbox.'] },
+        { kind: 'transform', instruction: 'Перепиши в превосходной степени (of the three)', source: 'Google Maps is expensive.', answers: ['Google Maps is the most expensive of the three.', 'Google Maps is the most expensive.'] },
+        { kind: 'transform', instruction: 'Сравни (cheap)', source: 'Leaflet costs $0. Mapbox costs $500.', answers: ['Leaflet is cheaper than Mapbox.', 'Mapbox is more expensive than Leaflet.'] },
+        { kind: 'fix', sentence: 'Mapbox is more faster than Leaflet.', answers: ['Mapbox is faster than Leaflet.'] },
+        { kind: 'fix', sentence: 'It is the most cheapest option.', answers: ['It is the cheapest option.', "It's the cheapest option."] },
+        { kind: 'fix', sentence: 'The new version is gooder.', answers: ['The new version is better.'] },
+        { kind: 'fix', sentence: 'This API is complicateder than REST.', answers: ['This API is more complicated than REST.'] },
+        { kind: 'fix', sentence: 'Our app is very faster now.', answers: ['Our app is much faster now.', 'Our app is a lot faster now.'] },
+        { kind: 'order', words: ['Which', 'one', 'is', 'the', 'best', 'for', 'us', '?'], ru: 'Какой вариант лучший для нас?' },
+        { kind: 'order', words: ['Leaflet', 'is', 'cheaper', 'than', 'Mapbox', '.'], ru: 'Leaflet дешевле, чем Mapbox.' },
+        { kind: 'order', words: ['It', "isn't", 'as', 'fast', 'as', 'Mapbox', '.'], ru: 'Он не такой быстрый, как Mapbox.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: comparing tools',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'options', ru: 'варианты', example: 'We have three options for the map.' },
+            { chunk: 'easy to start with', ru: 'легко начать', example: 'Leaflet is easy to start with.' },
+            { chunk: 'expensive', ru: 'дорогой', example: 'Google Maps is too expensive for us.' },
+            { chunk: 'flexible', ru: 'гибкий', example: 'Mapbox is very flexible.' },
+            { chunk: 'complicated', ru: 'сложный, запутанный', example: 'The API is more complicated.' },
+            { chunk: 'budget', ru: 'бюджет', example: "It's the worst for our budget." },
+            { chunk: 'plan B', ru: 'запасной вариант', example: 'Leaflet is our plan B.' },
+            { chunk: 'good summary', ru: 'хорошее резюме', example: 'Good summary, thank you.' },
+            { chunk: 'trade-off', ru: 'компромисс', example: 'Speed or price, it is a trade-off.' },
+            { chunk: 'pros and cons', ru: 'плюсы и минусы', example: 'Let’s list the pros and cons.' },
+            { chunk: 'what about', ru: 'а как насчёт', example: 'What about Google Maps?' },
+            { chunk: 'with big data', ru: 'с большим объёмом данных', example: 'Mapbox is faster with big data.' },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['trade-off', 'компромисс'],
+            ['pros and cons', 'плюсы и минусы'],
+            ['plan B', 'запасной вариант'],
+            ['flexible', 'гибкий'],
+            ['budget', 'бюджет'],
+          ],
+        },
+        { kind: 'gap', text: 'Let’s compare the pros and ___ of each library.', answers: ['cons'] },
+        { kind: 'gap', text: 'What ___ Vue? Did you try it?', answers: ['about'] },
+        { kind: 'gap', text: "It's fast but expensive. It's a ___ .", answers: ['trade-off'] },
+        { kind: 'gap', text: 'If Mapbox fails, Leaflet is our plan ___ .', answers: ['B'] },
+        { kind: 'gap', text: 'We have three ___ : A, B and C.', answers: ['options'] },
+        { kind: 'choice', prompt: 'Противоположность complicated:', options: ['simple', 'flexible', 'expensive', 'fast'], answer: 0 },
+        { kind: 'choice', prompt: '«Это слишком дорого для нашего бюджета»:', options: ["It's too expensive for our budget.", "It's very expensiver for budget.", 'It is too much cost.', "It's expensive than budget."], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'Which one is the best for us?' },
+        { kind: 'dictation', text: 'Leaflet is the smallest and the easiest.' },
+        { kind: 'dictation', text: "It's more expensive than Leaflet." },
+        { kind: 'dictation', text: 'Mapbox is faster with big data.' },
+        { kind: 'dictation', text: "It's the worst for our budget." },
+        { kind: 'dictation', text: 'Leaflet is our plan B.' },
+        {
+          kind: 'theory',
+          title: 'Слабое than',
+          body: '*than* в речи безударное и звучит как [ðən]: *faster [ðən] Leaflet*. Его легко пропустить на слух. Если слышишь сравнительную степень (-er, more), почти всегда дальше идёт **than**.',
+        },
+        { kind: 'dictation', text: "It isn't as fast as Mapbox." },
+        { kind: 'dictation', text: "Let's list the pros and cons." },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: compare and recommend',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: 'Leaflet is cheaper and simpler, but Mapbox is faster.' },
+        { kind: 'shadow', text: 'Google Maps is the most expensive option.' },
+        { kind: 'shadow', text: "Leaflet isn't as fast as Mapbox with big data." },
+        { kind: 'shadow', text: "Let's try Mapbox. Leaflet is our plan B." },
+        {
+          kind: 'speak',
+          situation: 'Сравни два инструмента, которые ты знаешь (например, VS Code и WebStorm, или React и Vue): что быстрее, что проще, что дороже.',
+          keywords: ['faster', 'than', 'more'],
+          sample: 'VS Code is faster than WebStorm and it is free. WebStorm is more powerful for refactoring, but it is more expensive.',
+        },
+        {
+          kind: 'speak',
+          situation: 'Порекомендуй лучший вариант и назови запасной.',
+          keywords: ['the best', 'plan B'],
+          sample: 'I think Mapbox is the best option for us. If it is too expensive, Leaflet is our plan B.',
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: comparison note',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Напиши короткое сравнение трёх библиотек карт для Confluence: по скорости, цене и простоте. В конце дай рекомендацию.',
+          checklist: [
+            'Есть сравнительная степень с *than*',
+            'Есть превосходная степень с *the*',
+            'Есть *not as … as*',
+            'Есть рекомендация (*I recommend… / Let’s…*)',
+          ],
+          minWords: 40,
+          sample:
+            "Map libraries: comparison\nLeaflet is the cheapest and the easiest to start with, but it isn't as fast as Mapbox with a lot of markers. Mapbox is faster and more flexible than Leaflet, but it is more expensive. Google Maps is the most popular, but it is also the most expensive, and its API is more complicated. I recommend Mapbox. Leaflet is our plan B.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
