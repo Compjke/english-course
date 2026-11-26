@@ -1,0 +1,192 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b1-22',
+  level: 'B1',
+  title: 'Day 37: The perfect standup update',
+  grammar: 'Смешение времён в рабочих апдейтах',
+  scene: 'Maya просит всех сделать стендап короче и яснее. Ты тренируешь идеальный апдейт.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: standup',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Daily standup',
+          format: 'call',
+          lines: [
+            { who: 'Maya', text: "Quick reminder: one minute each. Yesterday, today, blockers. Alex, you start." },
+            { who: 'You', text: "Yesterday I finished the ETA component and opened a PR. Arjun has already left a few comments." },
+            { who: 'You', text: "Today I'm fixing those comments, and then I'm going to start on the API integration." },
+            { who: 'You', text: "One blocker: I've been waiting for the staging keys since Monday. Ken, could you check?" },
+            { who: 'Ken', text: "Sorry, I'll send them right after the standup." },
+            { who: 'Arjun', text: "Yesterday I was debugging the ETA model all day. I've found the problem: some depots report time in UTC and some in local time." },
+            { who: 'Arjun', text: "Today I'll normalize the timestamps. If it works, the model will be ready by Thursday." },
+            { who: 'Lena', text: "I've tested the light mode on ten devices. Everything passes except one old tablet. No blockers." },
+            { who: 'Maya', text: "Perfect, that was eight minutes! Let's keep it like this." },
+          ],
+        },
+        { kind: 'choice', prompt: 'What did you do yesterday?', options: ['Debugged the model', 'Finished the ETA component and opened a PR', 'Tested devices', 'Nothing'], answer: 1 },
+        { kind: 'choice', prompt: 'What is your blocker?', options: ['No designs', 'Waiting for the staging keys', 'A bug', 'No time'], answer: 1 },
+        { kind: 'choice', prompt: 'What problem did Arjun find?', options: ['Different time formats: UTC vs local', 'A memory leak', 'A missing icon', 'A slow API'], answer: 0 },
+        { kind: 'choice', prompt: 'When will the model be ready if it works?', options: ['Today', 'By Thursday', 'Next month', 'Never'], answer: 1 },
+        { kind: 'choice', prompt: 'How many devices has Lena tested?', options: ['One', 'Five', 'Ten', 'Twenty'], answer: 2 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: tenses in a status update',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'Формула апдейта',
+          body:
+            'Хороший стендап — это 3 части, и у каждой свои времена:\n\n' +
+            '**Yesterday (вчера)**: Past Simple для законченного (*I finished, I opened*), Past Continuous для процесса (*I was debugging all day*), Present Perfect для результата, важного сейчас (*I’ve found the problem, Arjun has already left comments*).\n\n' +
+            '**Today (сегодня)**: Present Continuous для того, что уже начато или решено (*I’m fixing the comments*), going to для плана (*I’m going to start on the API*), will для решения или прогноза (*I’ll normalize the timestamps*).\n\n' +
+            '**Blockers**: Present Perfect Continuous для ожидания (*I’ve been waiting for the keys since Monday*), Present Simple для фактов (*I need access*).\n\n' +
+            'Условие и прогноз: *If it works, the model will be ready by Thursday.*',
+          table: [
+            ['Часть', 'Время', 'Пример'],
+            ['Yesterday', 'Past Simple', 'I **finished** the component.'],
+            ['Yesterday', 'Past Continuous', 'I **was debugging** all day.'],
+            ['Result now', 'Present Perfect', "I**'ve found** the problem."],
+            ['Today', 'Present Continuous / going to', "I**'m fixing** comments. I**'m going to** start…"],
+            ['Blocker', 'PP Continuous', "I**'ve been waiting** since Monday."],
+            ['Forecast', 'First Conditional', 'If it works, it **will** be ready.'],
+          ],
+        },
+        { kind: 'choice', prompt: 'Yesterday I ___ the ETA component.', options: ['have finished', 'finished', 'finish', 'was finish'], answer: 1 },
+        { kind: 'choice', prompt: 'Arjun ___ a few comments. (результат сейчас)', options: ['has already left', 'already leaves', 'left already yesterday', 'is leaving already'], answer: 0 },
+        { kind: 'choice', prompt: "Today I ___ those comments. (уже в процессе)", options: ['fix', "'m fixing", 'fixed', "'ve fixed"], answer: 1 },
+        { kind: 'choice', prompt: "I ___ for the keys since Monday.", options: ["'m waiting", "'ve been waiting", 'waited', 'wait'], answer: 1 },
+        { kind: 'choice', prompt: 'Yesterday I ___ the model all day.', options: ['was debugging', 'have debugged', 'debug', 'am debugging'], answer: 0 },
+        { kind: 'choice', prompt: 'If it ___ , the model will be ready by Thursday.', options: ['will work', 'works', 'worked', 'working'], answer: 1 },
+        { kind: 'choice', prompt: "I ___ the light mode on ten devices so far.", options: ['tested', "'ve tested", "'m testing", 'test'], answer: 1 },
+        { kind: 'choice', prompt: "— The keys are missing. — Sorry, I ___ them right now.", options: ["'ll send", 'send', "'m sending yesterday", 'sent'], answer: 0 },
+        { kind: 'gap', text: 'Yesterday I ___ (open) a PR for the ETA component.', answers: ['opened'] },
+        { kind: 'gap', text: "I ___ (find) the root cause. It's the time zones. (результат)", answers: ["'ve found", 'have found'] },
+        { kind: 'gap', text: "Today I'm going ___ start on the API integration.", answers: ['to'] },
+        { kind: 'gap', text: 'Lena ___ (test) ten devices so far.', answers: ["'s tested", 'has tested'] },
+        { kind: 'gap', text: 'I ___ (work) on this bug since 9 am, and I still have no idea.', answers: ["'ve been working", 'have been working'] },
+        { kind: 'gap', text: 'When I ___ (check) the logs yesterday, I saw a strange error.', answers: ['checked'] },
+        { kind: 'gap', text: 'If Ken sends the keys today, I ___ (finish) by Friday.', answers: ["'ll finish", 'will finish'] },
+        { kind: 'transform', instruction: 'Превратите в блокер (PP Continuous + since)', source: 'I started waiting for the review on Tuesday. I am still waiting.', answers: ["I've been waiting for the review since Tuesday.", 'I have been waiting for the review since Tuesday.'] },
+        { kind: 'transform', instruction: 'Перепиши в прошлом (yesterday)', source: "I'm debugging the API all day.", answers: ['Yesterday I was debugging the API all day.', 'I was debugging the API all day yesterday.'] },
+        { kind: 'transform', instruction: 'Сделай прогноз-условие', source: 'Maybe the tests pass. Then we deploy tomorrow.', answers: ['If the tests pass, we will deploy tomorrow.', "If the tests pass, we'll deploy tomorrow."] },
+        { kind: 'fix', sentence: "Yesterday I've finished the component.", answers: ['Yesterday I finished the component.'] },
+        { kind: 'fix', sentence: "I'm waiting for the keys since Monday.", answers: ["I've been waiting for the keys since Monday.", 'I have been waiting for the keys since Monday.'] },
+        { kind: 'fix', sentence: 'Today I will to fix the comments.', answers: ['Today I will fix the comments.', "Today I'll fix the comments.", "Today I'm going to fix the comments.", "Today I'm fixing the comments."] },
+        { kind: 'fix', sentence: 'If it will work, I will merge it.', answers: ['If it works, I will merge it.', "If it works, I'll merge it."] },
+        { kind: 'fix', sentence: 'Yesterday I debugging the model.', answers: ['Yesterday I was debugging the model.', 'Yesterday I debugged the model.'] },
+        { kind: 'order', words: ['Yesterday', 'I', 'finished', 'the', 'ETA', 'component', '.'], ru: 'Вчера я закончил компонент ETA.' },
+        { kind: 'order', words: ["I've", 'been', 'waiting', 'for', 'the', 'keys', '.'], ru: 'Я жду ключи (уже давно).' },
+        { kind: 'order', words: ['Today', "I'm", 'going', 'to', 'start', 'on', 'the', 'API', '.'], ru: 'Сегодня я начну работу над API.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: standup phrases',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'blocker', ru: 'блокер, то, что мешает', example: 'One blocker: I need the keys.' },
+            { chunk: 'no blockers', ru: 'блокеров нет', example: 'All good, no blockers.' },
+            { chunk: 'start on', ru: 'начать работу над', example: "I'm going to start on the API." },
+            { chunk: 'right after', ru: 'сразу после', example: "I'll send them right after the standup." },
+            { chunk: 'except', ru: 'кроме', example: 'Everything passes except one tablet.' },
+            { chunk: 'normalize the timestamps', ru: 'привести метки времени к одному виду', example: "I'll normalize the timestamps." },
+            { chunk: 'depots', ru: 'склады, депо', example: 'Some depots report local time.' },
+            { chunk: 'quick reminder', ru: 'короткое напоминание', example: 'Quick reminder: one minute each.' },
+            { chunk: 'on track', ru: 'идёт по плану', example: 'The ETA feature is on track.' },
+            { chunk: 'behind schedule', ru: 'отстаём от графика', example: "We're a bit behind schedule." },
+            { chunk: 'keep it like this', ru: 'держать так', example: "Great, let's keep it like this." },
+            { chunk: 'heads-up', ru: 'предупреждение заранее', example: 'Heads-up: staging will be down at 3.' },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['on track', 'по плану'],
+            ['behind schedule', 'отстаём от графика'],
+            ['heads-up', 'предупреждение заранее'],
+            ['blocker', 'то, что мешает'],
+            ['except', 'кроме'],
+          ],
+        },
+        { kind: 'gap', text: 'Heads-___ : I\'m off tomorrow afternoon.', answers: ['up'] },
+        { kind: 'gap', text: "We're on ___ for the Thursday release.", answers: ['track'] },
+        { kind: 'gap', text: "Nothing is blocking me. No ___ .", answers: ['blockers'] },
+        { kind: 'gap', text: "We're two days behind ___ because of the bug.", answers: ['schedule'] },
+        { kind: 'gap', text: 'All tests pass ___ the flaky one.', answers: ['except'] },
+        { kind: 'choice', prompt: 'Хороший апдейт на стендапе длится…', options: ['about one minute', 'ten minutes', 'until everyone falls asleep', 'five seconds'], answer: 0 },
+        { kind: 'choice', prompt: '«Предупреждаю заранее»:', options: ['Heads-up:', 'Head down:', 'Attention up:', 'Warn before:'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'Yesterday I finished the ETA component and opened a PR.' },
+        { kind: 'dictation', text: 'Arjun has already left a few comments.' },
+        { kind: 'dictation', text: "Today I'm fixing those comments." },
+        { kind: 'dictation', text: "I've been waiting for the staging keys since Monday." },
+        { kind: 'dictation', text: 'Yesterday I was debugging the model all day.' },
+        { kind: 'dictation', text: 'If it works, the model will be ready by Thursday.' },
+        { kind: 'dictation', text: 'Everything passes except one old tablet.' },
+        { kind: 'dictation', text: "We're on track, no blockers." },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: your standup',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: 'Yesterday I finished the ETA component and opened a PR.' },
+        { kind: 'shadow', text: "Today I'm fixing the comments, and then I'm going to start on the API." },
+        { kind: 'shadow', text: "One blocker: I've been waiting for the keys since Monday." },
+        { kind: 'shadow', text: "If it works, it'll be ready by Thursday." },
+        {
+          kind: 'speak',
+          situation: 'Сделай свой стендап-апдейт за 1 минуту (реальный или придуманный): yesterday, today, blockers.',
+          keywords: ['yesterday', 'today', 'blocker'],
+          sample: "Yesterday I fixed two bugs in the checkout and reviewed Lena's PR. Today I'm writing tests for the payment form. One blocker: I've been waiting for the API docs since Tuesday.",
+        },
+        {
+          kind: 'speak',
+          situation: 'Сообщи, что вы отстаёте от графика: почему, что уже сделано и что будет, если проблему решат сегодня.',
+          keywords: ['behind schedule', "I've", 'if'],
+          sample: "We're a bit behind schedule. I've fixed the main bug, but the tests are still failing. If Ken fixes the CI today, we'll catch up by Friday.",
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: async standup',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Команда перешла на асинхронный стендап в Slack. Напиши свой апдейт: Yesterday / Today / Blockers / Heads-up. Используй минимум 5 разных времён.',
+          checklist: [
+            'Past Simple и Past Continuous для вчера',
+            'Present Perfect для результата',
+            'Present Continuous / going to для сегодня',
+            'PP Continuous для блокера + First Conditional для прогноза',
+          ],
+          minWords: 50,
+          sample:
+            "Yesterday: I finished the ETA component and opened a PR. In the afternoon I was helping Lena with the tablet bug. Arjun has already reviewed the PR.\nToday: I'm fixing the review comments, and then I'm going to start on the API integration.\nBlockers: I've been waiting for the staging keys since Monday. If I get them today, I'll finish the integration by Thursday.\nHeads-up: I'm off on Friday afternoon.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
