@@ -1,0 +1,216 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'a2-06',
+  level: 'A2',
+  title: 'Day 6: A bug or the bug?',
+  grammar: 'Артикли a / an / the / без артикля',
+  scene: 'Lena показывает, как в команде пишут баг-репорты.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: a bug report',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Pair session with Lena',
+          format: 'call',
+          lines: [
+            { who: 'Lena', text: "Let's write a bug report together. I found a bug on the checkout page yesterday." },
+            { who: 'You', text: "Sure. What's the bug?" },
+            { who: 'Lena', text: 'The page shows an error when the user enters a long address. The error says "Invalid input".' },
+            { who: 'You', text: 'Is it a frontend problem or a backend problem?' },
+            { who: 'Lena', text: 'I think it’s the backend. The API returns a 400 response. But we need a screenshot and the exact steps.' },
+            { who: 'You', text: 'OK. First step: open the app. Second: add an item to the cart. Third: enter an address with more than 100 characters.' },
+            { who: 'Lena', text: 'Perfect. The title must be short and clear. And we always add the environment and the browser.' },
+            { who: 'You', text: 'Do we write the priority too?' },
+            { who: 'Lena', text: 'Yes. This one is a high priority, because users can’t pay. Money is important!' },
+            { who: 'You', text: 'Got it. And who fixes it?' },
+            { who: 'Lena', text: 'Arjun usually takes backend bugs. I assign the ticket to him in Jira.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'Where is the bug?', options: ['On the login page', 'On the checkout page', 'In the mobile app', 'In Jira'], answer: 1 },
+        { kind: 'choice', prompt: 'When does the error appear?', options: ['When the user enters a long address', 'When the user logs in', 'When the page loads', 'When the cart is empty'], answer: 0 },
+        { kind: 'choice', prompt: 'What does the API return?', options: ['A 500 response', 'A 404 response', 'A 400 response', 'Nothing'], answer: 2 },
+        { kind: 'choice', prompt: 'Why is the priority high?', options: ['The page is ugly.', "Users can't pay.", 'Lena is angry.', 'The deadline is close.'], answer: 1 },
+        { kind: 'choice', prompt: 'Who usually takes backend bugs?', options: ['Lena', 'Ken', 'Arjun', 'You'], answer: 2 },
+        {
+          kind: 'choice',
+          prompt: 'Lena говорит: «I found **a** bug… What’s **the** bug?» Почему артикль сменился?',
+          options: ['Сначала баг новый для собеседника, потом уже известный', 'Это ошибка', 'Потому что вопрос', 'the всегда в вопросах'],
+          answer: 0,
+        },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: articles',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'a / an: «один из», новый предмет',
+          body:
+            'Артикль **a / an** ставим перед **исчисляемым существительным в единственном числе**, когда предмет **один из многих** или упоминается **впервые**: *I found a bug. She is a QA engineer. We need a screenshot.*\n\n' +
+            '**an** ставим перед **гласным звуком** (не буквой!): *an error, an API, an hour, an SQL query* (звучит «эс-кью-эл»). А *a user, a UI, a URL*, потому что там звук «ю».\n\n' +
+            'Перед профессией в единственном числе артикль обязателен: *I’m a developer*, а не *I’m developer*.',
+          examples: ['I found a bug on the checkout page.', 'The API returns an error.', 'We need an hour for this task.', 'This is a URL, not an IP address.'],
+        },
+        {
+          kind: 'theory',
+          title: 'the: «тот самый», понятно какой',
+          body:
+            '**the** ставим, когда **и говорящему, и слушающему понятно, о каком именно предмете речь**:\n' +
+            'Предмет уже упоминали: *I found a bug. The bug is on checkout.*\nОн единственный в контексте: *the API, the backend, the main branch, the CI, the team*.\nЕсть уточнение: *the bug from yesterday, the error on line 12*.\nПорядковые числа и превосходная степень: *the first step, the best option*.\n\n' +
+            '**Без артикля** употребляются:\nмножественное число и неисчисляемые в общем смысле: *Bugs are normal. Money is important. Users love speed.*\nназвания продуктов, языков и компаний: *Jira, Python, GitLab, Brightloop*;\nдни, месяцы, устойчивые фразы: *on Monday, at work, at home, by email*.',
+          table: [
+            ['', 'Пример'],
+            ['a/an: первый раз, один из', 'I found **a** bug.'],
+            ['the: уже известный', '**The** bug is on checkout.'],
+            ['the: единственный в контексте', 'Restart **the** server, please.'],
+            ['— : общий смысл, мн. ч.', '**Bugs** are part of life.'],
+            ['— : названия', 'We use **Jira** and **TypeScript**.'],
+          ],
+          pitfalls: [
+            { wrong: "I'm developer.", right: "I'm a developer." },
+            { wrong: 'The API returns a error.', right: 'The API returns an error.' },
+            { wrong: 'We use the Jira.', right: 'We use Jira.' },
+            { wrong: 'The users love fast apps. (в общем)', right: 'Users love fast apps.' },
+            { wrong: 'Please restart server.', right: 'Please restart the server.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'The API returns ___ error.', options: ['a', 'an', 'the', '— (no article)'], answer: 1 },
+        { kind: 'choice', prompt: 'Lena is ___ QA engineer.', options: ['a', 'an', 'the', '— (no article)'], answer: 0, explain: 'QA читается «кью-эй», согласный звук, значит **a**.' },
+        { kind: 'choice', prompt: 'We use ___ GitLab for code review.', options: ['a', 'an', 'the', '— (no article)'], answer: 3 },
+        { kind: 'choice', prompt: 'I found a bug. ___ bug is in the cart.', options: ['A', 'An', 'The', '— (no article)'], answer: 2 },
+        { kind: 'choice', prompt: '___ users don’t like slow apps. (в общем)', options: ['A', 'The', '— (no article)', 'An'], answer: 2 },
+        { kind: 'choice', prompt: 'It takes ___ hour to deploy.', options: ['a', 'an', 'the', '— (no article)'], answer: 1 },
+        { kind: 'choice', prompt: 'Please merge it into ___ main branch.', options: ['a', 'an', 'the', '— (no article)'], answer: 2 },
+        { kind: 'choice', prompt: 'This is ___ first step.', options: ['a', 'the', 'an', '— (no article)'], answer: 1 },
+        { kind: 'choice', prompt: 'Send me ___ URL, please. (любую, которая есть)', options: ['a', 'an', '— (no article)', 'the'], answer: 0, explain: 'URL читается «ю-ар-эл»: первый звук согласный [j], поэтому **a**. В контексте «ту самую ссылку» сказали бы *the URL*.' },
+        { kind: 'choice', prompt: 'I work from home on ___ Fridays.', options: ['a', 'the', '— (no article)', 'an'], answer: 2 },
+        { kind: 'gap', text: 'We need ___ screenshot and the exact steps.', answers: ['a'] },
+        { kind: 'gap', text: 'There is ___ issue with the login form.', answers: ['an'] },
+        { kind: 'gap', text: 'Can you restart ___ server? It is down again.', answers: ['the'] },
+        { kind: 'gap', text: 'Arjun is ___ experienced developer.', answers: ['an'] },
+        { kind: 'gap', text: 'This is ___ best solution we have.', answers: ['the'] },
+        { kind: 'gap', text: 'She opened ___ ticket in Jira. The ticket is about payments.', answers: ['a'] },
+        { kind: 'fix', sentence: "I'm frontend developer.", answers: ["I'm a frontend developer.", 'I am a frontend developer.'] },
+        { kind: 'fix', sentence: 'The page shows a error.', answers: ['The page shows an error.'] },
+        { kind: 'fix', sentence: 'We use the Slack for chat.', answers: ['We use Slack for chat.'] },
+        { kind: 'fix', sentence: 'Please check logs on server.', answers: ['Please check the logs on the server.'] },
+        { kind: 'fix', sentence: 'It is a best option.', answers: ['It is the best option.', "It's the best option."] },
+        { kind: 'order', words: ['I', 'found', 'a', 'bug', 'in', 'the', 'cart', '.'], ru: 'Я нашёл баг в корзине.' },
+        { kind: 'order', words: ['The', 'API', 'returns', 'an', 'error', '.'], ru: 'API возвращает ошибку.' },
+        { kind: 'order', words: ['Users', "can't", 'pay', 'with', 'a', 'card', '.'], ru: 'Пользователи не могут оплатить картой.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: bug reports',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'bug report', ru: 'отчёт о баге', example: "Let's write a bug report together." },
+            { chunk: 'steps to reproduce', ru: 'шаги воспроизведения', example: 'Please add the steps to reproduce.' },
+            { chunk: 'expected result', ru: 'ожидаемый результат', example: 'The expected result is a success page.' },
+            { chunk: 'actual result', ru: 'фактический результат', example: 'The actual result is an error.' },
+            { chunk: 'screenshot', ru: 'скриншот', example: 'Attach a screenshot, please.' },
+            { chunk: 'high priority', ru: 'высокий приоритет', example: 'This bug is a high priority.' },
+            { chunk: 'assign the ticket', ru: 'назначить тикет', example: 'I assign the ticket to Arjun.' },
+            { chunk: 'checkout page', ru: 'страница оформления заказа', example: 'The bug is on the checkout page.' },
+            { chunk: 'invalid input', ru: 'неверные входные данные', example: 'The error says "Invalid input".' },
+            { chunk: 'environment', ru: 'окружение', example: 'Always add the environment and the browser.' },
+            { chunk: 'got it', ru: 'понял(а)', example: 'Got it, thanks for explaining.' },
+            { chunk: 'exact', ru: 'точный', example: 'We need the exact steps.' },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['expected result', 'ожидаемый результат'],
+            ['actual result', 'фактический результат'],
+            ['steps to reproduce', 'шаги воспроизведения'],
+            ['assign', 'назначить'],
+            ['environment', 'окружение'],
+          ],
+        },
+        { kind: 'gap', text: 'Steps to ___ : 1. Open the app. 2. Add an item.', answers: ['reproduce'] },
+        { kind: 'gap', text: 'Expected ___ : the order is created.', answers: ['result'] },
+        { kind: 'gap', text: 'Please attach a ___ of the error.', answers: ['screenshot'] },
+        { kind: 'gap', text: 'Can you ___ this ticket to Ken?', answers: ['assign'] },
+        { kind: 'gap', text: 'Which ___ is it: staging or production?', answers: ['environment'] },
+        { kind: 'choice', prompt: 'Короткий ответ «понял, принял»:', options: ['Got it.', 'I got.', 'Understand.', 'Is clear me.'], answer: 0 },
+        { kind: 'choice', prompt: 'Хороший заголовок бага:', options: ['Checkout: error for addresses over 100 characters', 'Bug!!!', 'Something is wrong', 'Please fix fast'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'I found a bug on the checkout page.' },
+        { kind: 'dictation', text: 'The API returns an error.' },
+        { kind: 'dictation', text: 'We need a screenshot and the exact steps.' },
+        { kind: 'dictation', text: 'This one is a high priority.' },
+        { kind: 'dictation', text: 'I assign the ticket to Arjun.' },
+        { kind: 'dictation', text: 'Users love fast apps.' },
+        {
+          kind: 'theory',
+          title: 'Как звучит the',
+          body: 'Перед согласным звуком *the* звучит слабо, как [ðə]: *the bug, the server*.\nПеред гласным звуком звучит как [ði]: *the API, the error, the end*.\nЗвук [ð] — кончик языка между зубами, звонко. Не «зе» и не «де»!',
+        },
+        { kind: 'dictation', text: 'The environment is staging.' },
+        { kind: 'dictation', text: 'Please add the expected result.' },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: report a bug',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: 'I found a bug on the checkout page.' },
+        { kind: 'shadow', text: 'The API returns an error when the address is too long.' },
+        { kind: 'shadow', text: 'This is a high priority, because users can’t pay.' },
+        { kind: 'shadow', text: 'Got it. I assign the ticket to Arjun.' },
+        {
+          kind: 'speak',
+          situation: 'Расскажи на стендапе о баге: где он, что ожидалось и что происходит на самом деле.',
+          keywords: ['I found a bug', 'expected result', 'actual result'],
+          sample: 'I found a bug in the search. The expected result is a list of parcels. The actual result is an empty page.',
+        },
+        {
+          kind: 'speak',
+          situation: 'Объясни коллеге шаги воспроизведения бага: открыть приложение, войти, нажать кнопку экспорта.',
+          keywords: ['open the app', 'log in', 'click'],
+          sample: 'First, open the app. Then log in as an admin. After that, click the Export button, and you see an error.',
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: bug report',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Напиши баг-репорт в Jira: заголовок, окружение, шаги воспроизведения, ожидаемый и фактический результат, приоритет. Баг такой: на странице профиля аватар не загружается, если файл больше 2 MB.',
+          checklist: [
+            'Короткий понятный заголовок',
+            'Есть Steps to reproduce (нумерованные)',
+            'Есть Expected result и Actual result',
+            'Артикли: *a* в первый раз, *the* дальше; без артикля перед Chrome, Jira',
+          ],
+          minWords: 40,
+          sample:
+            "Title: Profile page: avatar upload fails for files over 2 MB\nEnvironment: staging, Chrome 130\nSteps to reproduce:\n1. Log in as a regular user.\n2. Open the profile page.\n3. Upload an image bigger than 2 MB.\nExpected result: the new avatar appears.\nActual result: the page shows an error and the old avatar stays.\nPriority: medium, users can still use the app.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
