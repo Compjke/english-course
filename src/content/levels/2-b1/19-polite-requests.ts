@@ -1,0 +1,207 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b1-19',
+  level: 'B1',
+  title: 'Day 34: Would you mind…?',
+  grammar: 'Вежливые просьбы и предложения: Would you mind, Could you possibly, Shall I, I was wondering if',
+  scene: 'Тебе нужна помощь трёх людей из других команд. Пишем просьбы так, чтобы хотелось помочь.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: asking other teams',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'DMs in Slack',
+          format: 'chat',
+          lines: [
+            { who: 'You', text: "Hi Ken, sorry to bother you on your last day before the holiday. Would you mind giving me read access to the payment logs?" },
+            { who: 'Ken', text: "Not at all! Done. Shall I also add you to the on-call channel?" },
+            { who: 'You', text: 'Yes, please. That would be great.' },
+            { who: 'You', text: "Hi Sofia, I was wondering if you could look at the light mode icons. Some of them are blurry on old phones." },
+            { who: 'Sofia', text: "Sure, I'd be happy to. Could you send me a screenshot?" },
+            { who: 'You', text: "Of course, here it is. Would it be possible to get new icons by Wednesday?" },
+            { who: 'Sofia', text: "Wednesday is tight, but I'll try. Would Thursday morning work too?" },
+            { who: 'You', text: "Thursday morning is fine. Thanks a lot!" },
+            { who: 'You', text: "Hi Tom, could you possibly join the light mode sync on Monday? The client question needs you." },
+            { who: 'Tom', text: "I'm afraid I can't on Monday, I'm at a conference. Do you want me to send my notes instead?" },
+            { who: 'You', text: "That would really help, thanks!" },
+          ],
+        },
+        { kind: 'choice', prompt: 'What did you ask Ken for?', options: ['A new laptop', 'Read access to the payment logs', 'A day off', 'Coffee'], answer: 1 },
+        { kind: 'choice', prompt: 'What did Ken offer?', options: ['To add you to the on-call channel', 'To fix the icons', 'To join the sync', 'Nothing'], answer: 0 },
+        { kind: 'choice', prompt: 'What is the problem with the icons?', options: ['They are too big', 'Some are blurry on old phones', 'They are missing', 'Wrong colours'], answer: 1 },
+        { kind: 'choice', prompt: 'When will Sofia probably deliver?', options: ['Monday', 'Wednesday for sure', 'Thursday morning', 'Next month'], answer: 2 },
+        { kind: 'choice', prompt: 'Why can’t Tom join?', options: ["He's sick", "He's at a conference", "He's on holiday", "He doesn't want to"], answer: 1 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: politeness',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'Шкала вежливости просьб',
+          body:
+            'Чем длиннее и «условнее» фраза, тем она вежливее. Для коллег подходят средние формы, для другого отдела, начальства и клиентов лучше брать более вежливые.\n\n' +
+            '*Send me the logs.* — приказ, звучит грубо.\n*Can you send me the logs?* — нормально для близких коллег.\n*Could you send me the logs?* — вежливо, это стандарт.\n*Would you mind sending me the logs?* — очень вежливо (после mind идёт **-ing**!).\n*Could you possibly send…? / Would it be possible to…?* — очень вежливо, для большой просьбы.\n*I was wondering if you could send…* — максимально мягко.\n\n' +
+            'Ответ на *Would you mind…?* — **Not at all** / **No problem** (= не возражаю, сделаю). Ответ *Yes* здесь буквально значит «да, возражаю»!',
+          table: [
+            ['Форма', 'Пример'],
+            ['Can you…?', 'Can you check this?'],
+            ['Could you…?', 'Could you check this?'],
+            ['Would you mind + -ing?', 'Would you mind check**ing** this?'],
+            ['Could you possibly…?', 'Could you possibly join on Monday?'],
+            ['Would it be possible to…?', 'Would it be possible to get it by Wednesday?'],
+            ['I was wondering if you could…', 'I was wondering if you could help.'],
+          ],
+        },
+        {
+          kind: 'theory',
+          title: 'Предложить помощь и вежливо отказать',
+          body:
+            '**Предложить**: *Shall I add you to the channel? Do you want me to send my notes? Would you like me to help? I can do it if you like.*\n\n' +
+            '**Принять**: *Yes, please. That would be great. That would really help.*\n**Вежливо отказать**: *I’m afraid I can’t… / Unfortunately, I won’t be able to… / I’d love to, but…* и предложить альтернативу: *…but I can send my notes instead.*\n\n' +
+            '**Смягчить нагрузку**: *Sorry to bother you… / When you have a minute… / No rush.*',
+          pitfalls: [
+            { wrong: 'Would you mind to send it?', right: 'Would you mind sending it?' },
+            { wrong: '— Would you mind…? — Yes, sure! (= согласен помочь)', right: '— Would you mind…? — Not at all! / No problem!' },
+            { wrong: 'Do you want that I send my notes?', right: 'Do you want me to send my notes?' },
+            { wrong: 'I was wondering if you can help.', right: 'I was wondering if you could help.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'Would you mind ___ me read access?', options: ['to give', 'giving', 'give', 'gave'], answer: 1 },
+        { kind: 'choice', prompt: '— Would you mind checking this? — ___ (согласен помочь)', options: ['Yes, I would.', 'Not at all.', 'Yes, I mind.', 'I mind not.'], answer: 1 },
+        { kind: 'choice', prompt: '___ I add you to the on-call channel? (предложение)', options: ['Shall', 'Will', 'Do', 'Would you mind'], answer: 0 },
+        { kind: 'choice', prompt: 'Do you want ___ my notes?', options: ['that I send', 'me to send', 'me send', 'I send'], answer: 1 },
+        { kind: 'choice', prompt: 'I was wondering if you ___ look at the icons.', options: ['can', 'could', 'will', 'are'], answer: 1 },
+        { kind: 'choice', prompt: "I'm ___ I can't join on Monday.", options: ['sorry that afraid', 'afraid', 'scared', 'fear'], answer: 1 },
+        { kind: 'choice', prompt: 'Самая вежливая просьба:', options: ['Send the report.', 'Can you send the report?', 'I was wondering if you could send the report.', 'Report, please.'], answer: 2 },
+        { kind: 'choice', prompt: '___ be possible to get the icons by Wednesday?', options: ['Would it', 'Is it would', 'Will be it', 'Could it to'], answer: 0 },
+        { kind: 'gap', text: 'Would you mind ___ (join) the call at 3?', answers: ['joining'] },
+        { kind: 'gap', text: 'Could you ___ send me the file today? (очень вежливо)', answers: ['possibly'] },
+        { kind: 'gap', text: '___ I send you the screenshot? (предложение)', answers: ['Shall'] },
+        { kind: 'gap', text: 'Would you like ___ to help with the tests?', answers: ['me'] },
+        { kind: 'gap', text: '— Shall I order lunch? — Yes, please. That would be ___ .', answers: ['great'] },
+        { kind: 'gap', text: 'Sorry to ___ you, but the build is red.', answers: ['bother'] },
+        { kind: 'gap', text: "I'm ___ I won't be able to come.", answers: ['afraid'] },
+        { kind: 'transform', instruction: 'Сделай очень вежливой (Would you mind…)', source: 'Review my PR.', answers: ['Would you mind reviewing my PR?'] },
+        { kind: 'transform', instruction: 'Сделай мягкой (I was wondering if…)', source: 'Can you help me with Docker?', answers: ['I was wondering if you could help me with Docker.', 'I was wondering if you could help me with Docker?'] },
+        { kind: 'transform', instruction: 'Предложи помощь (Shall I…?)', source: 'I can book the meeting room.', answers: ['Shall I book the meeting room?'] },
+        { kind: 'transform', instruction: 'Перепиши с Do you want me to…?', source: 'Should I send the notes?', answers: ['Do you want me to send the notes?'] },
+        { kind: 'fix', sentence: 'Would you mind to check my code?', answers: ['Would you mind checking my code?'] },
+        { kind: 'fix', sentence: 'Do you want that I call the client?', answers: ['Do you want me to call the client?'] },
+        { kind: 'fix', sentence: 'I was wondering if you can join.', answers: ['I was wondering if you could join.'] },
+        { kind: 'fix', sentence: 'Could you possibly to send it?', answers: ['Could you possibly send it?'] },
+        { kind: 'fix', sentence: 'Would you like that I help?', answers: ['Would you like me to help?'] },
+        { kind: 'order', words: ['Would', 'you', 'mind', 'giving', 'me', 'access', '?'], ru: 'Не мог бы ты дать мне доступ?' },
+        { kind: 'order', words: ['Shall', 'I', 'send', 'you', 'the', 'notes', '?'], ru: 'Прислать тебе заметки?' },
+        { kind: 'order', words: ["I'm", 'afraid', 'I', "can't", 'join', '.'], ru: 'Боюсь, я не смогу присоединиться.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: requests',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'sorry to bother you', ru: 'извини, что беспокою', example: 'Sorry to bother you, quick question.' },
+            { chunk: 'not at all', ru: 'вовсе нет (не возражаю)', example: 'Would you mind? — Not at all!' },
+            { chunk: 'that would be great', ru: 'было бы отлично', example: 'Yes, please, that would be great.' },
+            { chunk: "I'd be happy to", ru: 'с радостью', example: "Sure, I'd be happy to help." },
+            { chunk: 'is tight', ru: 'впритык (о сроке)', example: 'Wednesday is tight.' },
+            { chunk: 'no rush', ru: 'не спеши', example: 'No rush, next week is fine.' },
+            { chunk: 'when you have a minute', ru: 'когда будет минутка', example: 'When you have a minute, could you look?' },
+            { chunk: 'quick question', ru: 'быстрый вопрос', example: 'Hi Ken, quick question about the VPN.' },
+            { chunk: 'read access', ru: 'доступ на чтение', example: 'I need read access to the logs.' },
+            { chunk: 'that would really help', ru: 'это бы очень помогло', example: 'A short summary? That would really help.' },
+            { chunk: 'blurry', ru: 'размытый', example: 'The icons are blurry.' },
+            { chunk: 'instead', ru: 'вместо этого', example: 'I can send my notes instead.' },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['no rush', 'не спеши'],
+            ['is tight', 'впритык'],
+            ['blurry', 'размытый'],
+            ['quick question', 'быстрый вопрос'],
+            ["I'd be happy to", 'с радостью'],
+          ],
+        },
+        { kind: 'gap', text: 'No ___ , you can do it next week.', answers: ['rush'] },
+        { kind: 'gap', text: 'Hi Lena, quick ___ : where are the test accounts?', answers: ['question'] },
+        { kind: 'gap', text: "Sure, I'd be ___ to help.", answers: ['happy'] },
+        { kind: 'gap', text: 'When you have a ___ , could you check my PR?', answers: ['minute'] },
+        { kind: 'gap', text: 'The deadline is ___ , but we can make it.', answers: ['tight'] },
+        { kind: 'choice', prompt: 'Начало сообщения незнакомому человеку из другой команды:', options: ["Hi! Sorry to bother you, I'm Alex from the Delivery team.", 'Hey you. Need help.', 'Answer me.', 'Urgent!!!'], answer: 0 },
+        { kind: 'choice', prompt: 'Как просто написать «Hi» без вопроса в Slack — это…', options: ['плохая практика: сразу пиши вопрос', 'идеальный стиль', 'обязательно', 'вежливее всего'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'Sorry to bother you.' },
+        { kind: 'dictation', text: 'Would you mind giving me read access?' },
+        { kind: 'dictation', text: 'Not at all!' },
+        { kind: 'dictation', text: 'Shall I also add you to the channel?' },
+        { kind: 'dictation', text: 'I was wondering if you could look at the icons.' },
+        { kind: 'dictation', text: 'Would it be possible to get them by Wednesday?' },
+        { kind: 'dictation', text: "I'm afraid I can't on Monday." },
+        { kind: 'dictation', text: 'That would really help, thanks!' },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: ask nicely',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: 'Sorry to bother you. Would you mind giving me access?' },
+        { kind: 'shadow', text: 'I was wondering if you could look at the icons.' },
+        { kind: 'shadow', text: "Shall I send you a screenshot?" },
+        { kind: 'shadow', text: "I'm afraid I can't, but I can send my notes instead." },
+        {
+          kind: 'speak',
+          situation: 'Попроси человека из другой команды (вы не знакомы) провести для тебя 15-минутный созвон по их API на этой неделе.',
+          keywords: ['sorry to bother you', 'would you mind', 'no rush'],
+          sample: "Hi, sorry to bother you, I'm Alex from the Delivery team. Would you mind having a 15-minute call about your API this week? No rush, any day is fine.",
+        },
+        {
+          kind: 'speak',
+          situation: 'Коллега просит тебя выступить на демо в пятницу, но ты в отпуске. Вежливо откажи и предложи альтернативу.',
+          keywords: ["I'm afraid", 'instead'],
+          sample: "Thanks for asking! I'm afraid I can't, I'm on holiday on Friday. I can record a short video instead, if that helps.",
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: three requests',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Напиши три коротких сообщения: 1) коллеге — попросить ревью; 2) менеджеру другой команды — попросить доступ; 3) ответ на чужую просьбу с вежливым отказом и альтернативой.',
+          checklist: [
+            'Разный уровень вежливости: *Could you / Would you mind / I was wondering if*',
+            '*Would you mind* + **-ing**',
+            'Отказ: *I’m afraid… / Unfortunately…* + альтернатива',
+            'Смягчители: *sorry to bother you, no rush, when you have a minute*',
+          ],
+          minWords: 55,
+          sample:
+            "1. Hi Arjun, could you review my PR when you have a minute? No rush, today or tomorrow is fine.\n2. Hi Marta, sorry to bother you. I'm Alex from the Delivery team. I was wondering if you could give me read access to the payment logs. It would really help with a bug we're investigating.\n3. Hi Lena, thanks for asking! I'm afraid I won't be able to test it today, I'm on call. Would tomorrow morning work for you instead?",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
