@@ -1,0 +1,210 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b1-09',
+  level: 'B1',
+  title: 'Day 24: Code review etiquette',
+  grammar: 'should / ought to / had better / need to / don’t need to',
+  scene: 'Ты впервые ревьюишь чужой PR. Arjun учит, как давать советы, не обижая.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: your first review',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Pairing on a review',
+          format: 'call',
+          lines: [
+            { who: 'You', text: "Arjun, I'm reviewing the PR from the new intern. There are many problems. Should I just reject it?" },
+            { who: 'Arjun', text: "No, you shouldn't reject it on the first round. You should leave clear comments and explain why." },
+            { who: 'You', text: 'OK. The function is 300 lines long. What should I write?' },
+            { who: 'Arjun', text: "Something like: 'I think we should split this into smaller functions. It would be easier to test.'" },
+            { who: 'You', text: "And he's logging the user's password in one place." },
+            { who: 'Arjun', text: "That's serious. You need to block that. Say: 'We mustn't log passwords. This needs to be removed before we merge.'" },
+            { who: 'You', text: 'And the variable names are a bit strange, but they work.' },
+            { who: 'Arjun', text: "Then you don't need to block it. Mark it as a nit: 'Nit: maybe rename this to deliveryDate?'" },
+            { who: 'You', text: "Got it. Should I also check the tests?" },
+            { who: 'Arjun', text: "Definitely. And you'd better finish today. The intern is waiting, and long waits kill motivation." },
+          ],
+        },
+        { kind: 'choice', prompt: 'Should you reject the PR on the first round?', options: ['Yes, immediately', 'No, leave clear comments', 'Only if Arjun agrees', 'Ignore it'], answer: 1 },
+        { kind: 'choice', prompt: 'What is the serious problem?', options: ['Long function', 'Logging the password', 'Strange names', 'No comments'], answer: 1 },
+        { kind: 'choice', prompt: 'What is a "nit"?', options: ['A small, non-blocking comment', 'A critical bug', 'A test', 'A rejection'], answer: 0 },
+        { kind: 'choice', prompt: 'Why had you better finish today?', options: ['Maya said so', 'The intern is waiting; long waits kill motivation', 'The release is today', 'You are on holiday tomorrow'], answer: 1 },
+        { kind: 'choice', prompt: 'Which comment is blocking?', options: ['Rename the variable', 'Split the function', 'Remove password logging', 'Add an emoji'], answer: 2 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: advice & necessity',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'Советы: should, ought to, had better',
+          body:
+            '**should + глагол** — совет, мнение «стоит, следует»: *You should leave clear comments. We shouldn’t merge on Friday.* Это самая частая и мягкая форма.\n' +
+            '**ought to** — то же, что should, чуть формальнее: *You ought to check the tests.* Отрицание и вопросы с ought to почти не используют.\n' +
+            '**had better (’d better)** — сильный совет с предупреждением «а то будет плохо»: *You’d better finish today* (иначе стажёр расстроится). Отрицание: *You’d better not push to main.* Несмотря на *had*, это про **сейчас и будущее**.\n\n' +
+            'Вопрос: *Should I reject it? What should I write?*',
+          examples: ['You should split this function.', "You shouldn't reject it on the first round.", "You'd better finish today.", 'What should I write?'],
+        },
+        {
+          kind: 'theory',
+          title: 'Необходимость: need to, have to, must',
+          body:
+            '**need to** — нужно (по ситуации): *You need to block that.*\n**don’t need to / needn’t** — не нужно (можно, но не обязательно): *You don’t need to block it.* (= *don’t have to*)\n**have to / must** — обязательно (из прошлых уроков).\n**mustn’t** — нельзя!\n\n' +
+            'Пассивная форма с *need*: *This needs to be removed* (это нужно убрать). В разговоре встречается и *This needs removing*.',
+          table: [
+            ['Сила', 'Форма', 'Пример'],
+            ['мягкий совет', 'should / ought to', 'You **should** add a test.'],
+            ['совет-предупреждение', "had better ('d better)", "You**'d better** check it."],
+            ['необходимость', 'need to / have to', 'You **need to** remove this.'],
+            ['не нужно', "don't need to", "You **don't need to** block it."],
+            ['запрет', "mustn't", "We **mustn't** log passwords."],
+          ],
+          pitfalls: [
+            { wrong: 'You should to add tests.', right: 'You should add tests.' },
+            { wrong: 'You had better to finish.', right: "You'd better finish." },
+            { wrong: "You'd not better push.", right: "You'd better not push." },
+            { wrong: 'Do I should check it?', right: 'Should I check it?' },
+            { wrong: 'You need block it.', right: 'You need to block it.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'You ___ leave clear comments. (совет)', options: ['should', 'should to', 'must to', 'had better to'], answer: 0 },
+        { kind: 'choice', prompt: "You ___ finish today, or the intern will lose motivation.", options: ["'d better", 'ought', 'need', 'should to'], answer: 0 },
+        { kind: 'choice', prompt: '___ I reject the PR?', options: ['Do I should', 'Should', 'Ought', 'Had I better'], answer: 1 },
+        { kind: 'choice', prompt: "The names are OK. You ___ block the PR for that.", options: ["mustn't", "don't need to", "had better not", "need to"], answer: 1 },
+        { kind: 'choice', prompt: 'We ___ log passwords. Never!', options: ["don't need to", "mustn't", "shouldn't to", "needn't"], answer: 1 },
+        { kind: 'choice', prompt: "You'd better ___ push to main directly.", options: ['not', "don't", 'no', 'not to'], answer: 0 },
+        { kind: 'choice', prompt: 'This password log needs ___ before we merge.', options: ['remove', 'to remove', 'to be removed', 'removed'], answer: 2 },
+        { kind: 'gap', text: 'You ___ split this into smaller functions. (совет)', answers: ['should', 'ought to'] },
+        { kind: 'gap', text: 'You ___ better ask Ken before you touch the config.', answers: ['had', "'d"] },
+        { kind: 'gap', text: "You don't ___ to fix the nits now.", answers: ['need', 'have'] },
+        { kind: 'gap', text: 'What ___ I do if the CI is red?', answers: ['should'] },
+        { kind: 'gap', text: "We ___ to update the docs before the release. (нужно)", answers: ['need', 'have'] },
+        { kind: 'gap', text: "You ___ merge it on Friday evening. Bad idea. (не стоит)", answers: ["shouldn't", 'should not'] },
+        { kind: 'gap', text: 'You ought ___ check the tests too.', answers: ['to'] },
+        { kind: 'transform', instruction: 'Дай совет с should', source: "It's a good idea to add a unit test.", answers: ['You should add a unit test.', 'We should add a unit test.'] },
+        { kind: 'transform', instruction: 'Предупреди с had better (not)', source: "Don't deploy without Lena — it's risky.", answers: ["You'd better not deploy without Lena.", 'You had better not deploy without Lena.'] },
+        { kind: 'transform', instruction: 'Скажи, что это не нужно (need)', source: 'It is not necessary to rename the variables.', answers: ["You don't need to rename the variables.", 'You do not need to rename the variables.', "We don't need to rename the variables.", "You needn't rename the variables."] },
+        { kind: 'fix', sentence: 'You should to write more tests.', answers: ['You should write more tests.'] },
+        { kind: 'fix', sentence: "You'd better to ask Arjun.", answers: ["You'd better ask Arjun.", 'You had better ask Arjun.'] },
+        { kind: 'fix', sentence: 'Do I need block this PR?', answers: ['Do I need to block this PR?'] },
+        { kind: 'fix', sentence: "You'd not better merge it.", answers: ["You'd better not merge it.", 'You had better not merge it.'] },
+        { kind: 'fix', sentence: 'Does he should review it?', answers: ['Should he review it?'] },
+        { kind: 'order', words: ['I', 'think', 'we', 'should', 'split', 'this', 'function', '.'], ru: 'Думаю, стоит разбить эту функцию.' },
+        { kind: 'order', words: ['This', 'needs', 'to', 'be', 'removed', '.'], ru: 'Это нужно убрать.' },
+        { kind: 'order', words: ["You'd", 'better', 'finish', 'today', '.'], ru: 'Тебе лучше закончить сегодня.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: code review',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'reject', ru: 'отклонить', example: "Don't reject it on the first round." },
+            { chunk: 'first round', ru: 'первый круг (ревью)', example: 'This is only the first round.' },
+            { chunk: 'nit', ru: 'мелкое замечание', example: 'Nit: maybe rename this?' },
+            { chunk: 'blocking', ru: 'блокирующий', example: 'This comment is blocking.' },
+            { chunk: 'request changes', ru: 'запросить изменения', example: 'I clicked "Request changes".' },
+            { chunk: 'leave a comment', ru: 'оставить комментарий', example: 'Leave a comment on line 40.' },
+            { chunk: 'easier to test', ru: 'легче тестировать', example: 'Small functions are easier to test.' },
+            { chunk: "that's serious", ru: 'это серьёзно', example: "Logging passwords? That's serious." },
+            { chunk: 'definitely', ru: 'определённо', example: 'Definitely check the tests.' },
+            { chunk: 'intern', ru: 'стажёр', example: 'The new intern opened his first PR.' },
+            { chunk: 'kill motivation', ru: 'убивать мотивацию', example: 'Long waits kill motivation.' },
+            { chunk: 'LGTM', ru: 'looks good to me — одобряю', example: 'LGTM, nice work!' },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['LGTM', 'выглядит хорошо, одобряю'],
+            ['nit', 'мелкое замечание'],
+            ['reject', 'отклонить'],
+            ['intern', 'стажёр'],
+            ['blocking', 'блокирующий'],
+          ],
+        },
+        { kind: 'gap', text: '___ : missing semicolon on line 12.', answers: ['Nit'] },
+        { kind: 'gap', text: 'I clicked "Request ___ " because of the password log.', answers: ['changes'] },
+        { kind: 'gap', text: 'Please leave a ___ if something is unclear.', answers: ['comment'] },
+        { kind: 'gap', text: 'All good, ___ ! (одобряю)', answers: ['LGTM'] },
+        { kind: 'gap', text: "Small functions are easier ___ test.", answers: ['to'] },
+        { kind: 'choice', prompt: 'Мягкий комментарий в ревью:', options: ["Could we extract this into a helper? It'd be easier to read.", 'This is terrible.', 'Rewrite everything.', 'Why?!'], answer: 0 },
+        { kind: 'choice', prompt: 'Мелкое необязательное замечание помечают:', options: ['Nit:', 'Bug:', 'Fail:', 'Stop:'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'Should I just reject it?' },
+        { kind: 'dictation', text: "You shouldn't reject it on the first round." },
+        { kind: 'dictation', text: 'I think we should split this into smaller functions.' },
+        { kind: 'dictation', text: 'This needs to be removed before we merge.' },
+        { kind: 'dictation', text: "You don't need to block it." },
+        { kind: 'dictation', text: "You'd better finish today." },
+        {
+          kind: 'theory',
+          title: "'d better: почти неслышный 'd",
+          body: 'В речи *You’d better* часто звучит просто как «ю бетэ». Звук [d] почти не слышен, а иногда в разговоре его и не говорят: *You better check it.* В письме пиши **’d better**.',
+        },
+        { kind: 'dictation', text: 'Long waits kill motivation.' },
+        { kind: 'dictation', text: 'Definitely check the tests.' },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: give advice',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: "I think we should split this into smaller functions." },
+        { kind: 'shadow', text: "We mustn't log passwords. This needs to be removed." },
+        { kind: 'shadow', text: "Nit: maybe rename this to deliveryDate?" },
+        { kind: 'shadow', text: "You'd better finish the review today." },
+        {
+          kind: 'speak',
+          situation: 'Стажёр спрашивает: «How can I get my PRs approved faster?» Дай три совета.',
+          keywords: ['you should', "you don't need to", "you'd better"],
+          sample: "You should keep your PRs small. You don't need to fix every nit at once. And you'd better add tests, or Arjun will block it.",
+        },
+        {
+          kind: 'speak',
+          situation: 'Дай мягкий комментарий к коду коллеги: функция слишком длинная. Предложи разбить её и объясни зачем.',
+          keywords: ['I think we should', 'easier'],
+          sample: "I think we should split this function into two smaller ones. It would be easier to read and easier to test.",
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: review comments',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Напиши 4 комментария к PR стажёра: один блокирующий (пароль в логах), один совет (длинная функция), один nit (имя переменной) и итоговый общий комментарий с похвалой.',
+          checklist: [
+            'Блокирующий: *We mustn’t… / This needs to be…*',
+            'Совет: *I think we should… / Could we…*',
+            'Nit: *Nit: maybe…* и *you don’t need to…* (не блокирует)',
+            'Есть похвала и вежливый тон',
+          ],
+          minWords: 45,
+          sample:
+            "1. Blocking: We mustn't log the user's password here. This needs to be removed before we merge.\n2. I think we should split processOrder() into smaller functions. It would be easier to test.\n3. Nit: maybe rename d to deliveryDate? You don't need to fix it in this PR.\nOverall: nice work for a first PR! The logic is clear. Fix the logging, and I'll approve it today.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;

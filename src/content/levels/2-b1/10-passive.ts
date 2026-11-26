@@ -1,0 +1,216 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b1-10',
+  level: 'B1',
+  title: 'Day 25: How the data flows',
+  grammar: 'Passive Voice: Present & Past Simple',
+  scene: 'Arjun объясняет, как данные о посылке проходят через систему, и где возник старый баг.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: the data pipeline',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Architecture walkthrough',
+          format: 'call',
+          lines: [
+            { who: 'Arjun', text: "Let me explain the data flow. First, each parcel is scanned at the warehouse. The scan is sent to our API." },
+            { who: 'Arjun', text: 'Then the event is stored in Kafka and processed by the tracking service. The position is updated every thirty seconds.' },
+            { who: 'You', text: 'And how are customers notified?' },
+            { who: 'Arjun', text: 'Push notifications are sent by a separate service. Emails are generated from templates.' },
+            { who: 'You', text: 'Who wrote the tracking service?' },
+            { who: 'Arjun', text: "It was written by the first team in 2020. It was designed for 1,000 parcels a day. Now we have 200,000." },
+            { who: 'You', text: 'Wow. Was it ever rewritten?' },
+            { who: 'Arjun', text: "Partly. The database layer was replaced last year. But some old bugs weren't fixed. For example, duplicate events are sometimes created." },
+            { who: 'You', text: 'Is that bug tracked anywhere?' },
+            { who: 'Arjun', text: "Yes, it was reported by Lena in March. It's assigned to me, but it hasn't been prioritized yet." },
+          ],
+        },
+        { kind: 'choice', prompt: 'Where is each parcel scanned?', options: ['At the customer’s home', 'At the warehouse', 'In the API', 'In Kafka'], answer: 1 },
+        { kind: 'choice', prompt: 'How often is the position updated?', options: ['Every second', 'Every thirty seconds', 'Every hour', 'Once a day'], answer: 1 },
+        { kind: 'choice', prompt: 'When was the tracking service written?', options: ['Last year', 'In 2020', 'In March', 'Yesterday'], answer: 1 },
+        { kind: 'choice', prompt: 'What was replaced last year?', options: ['The whole service', 'The database layer', 'Kafka', 'The emails'], answer: 1 },
+        { kind: 'choice', prompt: 'Who reported the duplicate events bug?', options: ['Arjun', 'Lena', 'Ken', 'A customer'], answer: 1 },
+        {
+          kind: 'choice',
+          prompt: '«Each parcel **is scanned**». Почему не «each parcel scans»?',
+          options: ['Посылка не сканирует сама — её сканируют (пассив)', 'Это прошедшее время', 'Это ошибка', 'scan — неправильный глагол'],
+          answer: 0,
+        },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: passive voice',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'Пассив: важно действие, а не исполнитель',
+          body:
+            'Пассивный залог (**be + третья форма**) используется, когда **неважно, неизвестно или очевидно, кто сделал** действие, или когда нам важнее объект: *The parcel is scanned at the warehouse* (кто именно сканирует, неважно).\n\n' +
+            'Пассив очень часто встречается в технических текстах, документации и отчётах: *Events are stored in Kafka. The bug was fixed in v2.3.*\n\n' +
+            'Если нужно назвать исполнителя, добавь **by**: *It was written by the first team.*',
+          table: [
+            ['Время', 'Актив', 'Пассив'],
+            ['Present Simple', 'The service **processes** events.', 'Events **are processed**.'],
+            ['Past Simple', 'Lena **reported** the bug.', 'The bug **was reported** (by Lena).'],
+            ['Отрицание', "They didn't fix it.", "It **wasn't fixed**."],
+            ['Вопрос', 'Who wrote it?', '**Was** it **written** in 2020?'],
+          ],
+          examples: ['Each parcel is scanned at the warehouse.', 'Emails are generated from templates.', 'The database layer was replaced last year.', 'Were the old bugs fixed?'],
+        },
+        {
+          kind: 'theory',
+          title: 'Как строить и где ошибаются',
+          body:
+            '**be** ставится в нужное время (*is/are, was/were*), смысловой глагол всегда в **третьей форме** (V3): *is sent, was written, were created*.\n\n' +
+            'Русскоязычные часто забывают **be**: *The bug fixed yesterday* (≈ «баг починили») звучит как «баг починил что-то». Нужно: *The bug **was** fixed yesterday.*\n\n' +
+            'Безличное «говорят, сообщили, решили» по-английски тоже часто передают пассивом: «Решили перенести релиз» — *It was decided to postpone the release* или проще *The release was postponed*.',
+          pitfalls: [
+            { wrong: 'The service written in 2020.', right: 'The service was written in 2020.' },
+            { wrong: 'The emails are generate from templates.', right: 'The emails are generated from templates.' },
+            { wrong: 'It was wrote by Arjun.', right: 'It was written by Arjun.' },
+            { wrong: 'The bug was fixed from Lena.', right: 'The bug was fixed by Lena.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'Each parcel ___ at the warehouse.', options: ['scans', 'is scanned', 'scanned', 'is scan'], answer: 1 },
+        { kind: 'choice', prompt: 'The tracking service ___ in 2020.', options: ['wrote', 'was written', 'is written', 'was wrote'], answer: 1 },
+        { kind: 'choice', prompt: 'Push notifications ___ by a separate service.', options: ['send', 'are sent', 'is sent', 'are send'], answer: 1 },
+        { kind: 'choice', prompt: 'The bug ___ by Lena in March.', options: ['reported', 'was reported', 'is reporting', 'were reported'], answer: 1 },
+        { kind: 'choice', prompt: '___ the database layer replaced last year?', options: ['Did', 'Was', 'Is', 'Were'], answer: 1 },
+        { kind: 'choice', prompt: "Some old bugs ___ fixed.", options: ["wasn't", "weren't", "didn't", "aren't been"], answer: 1 },
+        { kind: 'choice', prompt: 'The logs ___ every night.', options: ['are deleted', 'deleted', 'is deleted', 'are delete'], answer: 0 },
+        { kind: 'gap', text: 'The event ___ (store) in Kafka. (Present)', answers: ['is stored'] },
+        { kind: 'gap', text: 'The position ___ (update) every thirty seconds.', answers: ['is updated'] },
+        { kind: 'gap', text: 'This feature ___ (design) by Sofia last spring.', answers: ['was designed'] },
+        { kind: 'gap', text: 'The old servers ___ (shut) down in 2024.', answers: ['were shut'] },
+        { kind: 'gap', text: 'Emails ___ (generate) from templates.', answers: ['are generated'] },
+        { kind: 'gap', text: "The release ___ (not / approve) yesterday, so we didn't deploy.", answers: ["wasn't approved", 'was not approved'] },
+        { kind: 'gap', text: 'When ___ this API created?', answers: ['was'] },
+        { kind: 'gap', text: 'The bug was fixed ___ Arjun.', answers: ['by'] },
+        { kind: 'transform', instruction: 'Перепиши в пассиве (без исполнителя)', source: 'We deploy the app every Thursday.', answers: ['The app is deployed every Thursday.'] },
+        { kind: 'transform', instruction: 'Перепиши в пассиве (с by)', source: 'Lena found the bug.', answers: ['The bug was found by Lena.'] },
+        { kind: 'transform', instruction: 'Перепиши в пассиве', source: 'Someone deleted the test data.', answers: ['The test data was deleted.'] },
+        { kind: 'transform', instruction: 'Сделай вопрос в пассиве', source: 'The logs were checked.', answers: ['Were the logs checked?'] },
+        { kind: 'fix', sentence: 'The API created in 2021.', answers: ['The API was created in 2021.'] },
+        { kind: 'fix', sentence: 'The tests are run by automatically every night.', answers: ['The tests are run automatically every night.'] },
+        { kind: 'fix', sentence: 'The docs was updated yesterday.', answers: ['The docs were updated yesterday.'] },
+        { kind: 'fix', sentence: 'This module was wrote by Ken.', answers: ['This module was written by Ken.'] },
+        { kind: 'fix', sentence: 'The data is send to the API.', answers: ['The data is sent to the API.'] },
+        { kind: 'order', words: ['The', 'scan', 'is', 'sent', 'to', 'our', 'API', '.'], ru: 'Скан отправляется в наш API.' },
+        { kind: 'order', words: ['It', 'was', 'written', 'by', 'the', 'first', 'team', '.'], ru: 'Его написала первая команда.' },
+        { kind: 'order', words: ['When', 'was', 'the', 'bug', 'reported', '?'], ru: 'Когда сообщили о баге?' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: architecture',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'data flow', ru: 'поток данных', example: 'Let me explain the data flow.' },
+            { chunk: 'warehouse', ru: 'склад', example: 'Parcels are scanned at the warehouse.' },
+            { chunk: 'event', ru: 'событие', example: 'Each scan creates an event.' },
+            { chunk: 'processed', ru: 'обработан', example: 'The event is processed by the service.' },
+            { chunk: 'notified', ru: 'уведомлён', example: 'How are customers notified?' },
+            { chunk: 'templates', ru: 'шаблоны', example: 'Emails are generated from templates.' },
+            { chunk: 'designed for', ru: 'рассчитан на', example: 'It was designed for 1,000 parcels a day.' },
+            { chunk: 'database layer', ru: 'слой работы с БД', example: 'The database layer was replaced.' },
+            { chunk: 'duplicate events', ru: 'дублирующиеся события', example: 'Duplicate events are sometimes created.' },
+            { chunk: 'prioritized', ru: 'приоритизирован', example: "The bug hasn't been prioritized yet." },
+            { chunk: 'partly', ru: 'частично', example: 'Partly. Only the DB layer.' },
+            { chunk: 'is tracked', ru: 'отслеживается (в трекере)', example: 'The bug is tracked in Jira.' },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['warehouse', 'склад'],
+            ['partly', 'частично'],
+            ['template', 'шаблон'],
+            ['designed for', 'рассчитан на'],
+            ['notify', 'уведомлять'],
+          ],
+        },
+        { kind: 'gap', text: 'The system was designed ___ a small load.', answers: ['for'] },
+        { kind: 'gap', text: 'Customers are ___ by email and push.', answers: ['notified'] },
+        { kind: 'gap', text: 'Is this bug ___ in Jira?', answers: ['tracked'] },
+        { kind: 'gap', text: 'Every scan creates a new ___ in Kafka.', answers: ['event'] },
+        { kind: 'gap', text: '— Was it rewritten? — ___ . Only the API.', answers: ['Partly'] },
+        { kind: 'choice', prompt: 'Технический стиль описания системы:', options: ['Events are stored in Kafka.', 'We put events to Kafka, you know.', 'Kafka eats events.', 'Events go Kafka.'], answer: 0 },
+        { kind: 'choice', prompt: '«Рассчитан на 1000 запросов»:', options: ['designed for 1,000 requests', 'calculated on 1,000 requests', 'counted for 1,000 requests', 'made on 1,000 requests'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'Each parcel is scanned at the warehouse.' },
+        { kind: 'dictation', text: 'The event is stored in Kafka.' },
+        { kind: 'dictation', text: 'Push notifications are sent by a separate service.' },
+        { kind: 'dictation', text: 'It was written by the first team in 2020.' },
+        { kind: 'dictation', text: 'The database layer was replaced last year.' },
+        { kind: 'dictation', text: 'It was reported by Lena in March.' },
+        {
+          kind: 'theory',
+          title: 'is / are + -ed: слушай окончание',
+          body: 'В пассиве *is* и *are* звучат слабо, но окончание **-ed** или третья форма подсказывают конструкцию: *it’s stored* [ɪts stɔːd], *they’re sent* [ðeə sent]. Если после *is/are* стоит глагол с -ed, это пассив, а не Present Continuous.',
+        },
+        { kind: 'dictation', text: 'Emails are generated from templates.' },
+        { kind: 'dictation', text: "Some old bugs weren't fixed." },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: explain a process',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: 'First, each parcel is scanned at the warehouse.' },
+        { kind: 'shadow', text: 'Then the event is stored and processed.' },
+        { kind: 'shadow', text: 'It was designed for a thousand parcels a day.' },
+        { kind: 'shadow', text: 'The bug was reported in March, but it was never fixed.' },
+        {
+          kind: 'speak',
+          situation: 'Объясни, как устроен процесс деплоя в твоём проекте (или придумай): что происходит с кодом после push. Используй пассив.',
+          keywords: ['is', 'are', 'then'],
+          sample: 'First, the code is pushed to GitHub. Then the tests are run automatically, and the app is built. After that, it is deployed to staging.',
+        },
+        {
+          kind: 'speak',
+          situation: 'Расскажи историю одного модуля: когда и кем он был написан, что было изменено потом.',
+          keywords: ['was written', 'was'],
+          sample: 'The payment module was written by an outsourcing team in 2019. It was rewritten in TypeScript last year, but the tests were never updated.',
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: system description',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Напиши раздел «How it works» для документации сервиса уведомлений: как данные проходят через систему (Present passive) и короткую историю сервиса (Past passive).',
+          checklist: [
+            'Present passive: *is sent / are stored*',
+            'Past passive: *was built / were added*',
+            'Хотя бы один раз *by + исполнитель*',
+            'Связки: *first, then, after that*',
+          ],
+          minWords: 50,
+          sample:
+            "How it works\nFirst, a tracking event is received from Kafka. Then the customer's preferences are loaded from the database. After that, a message is generated from a template and sent by email or push. Failed messages are retried three times.\nHistory: the service was built by the Delivery team in 2022. Push notifications were added in 2023, and the templates were redesigned by Sofia last year.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
