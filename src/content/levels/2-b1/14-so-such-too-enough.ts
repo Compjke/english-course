@@ -1,0 +1,217 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b1-14',
+  level: 'B1',
+  title: "Day 29: It's too slow on old phones",
+  grammar: 'so / such, too / enough',
+  scene: 'Lena воспроизвела краш на старых Android. Обсуждаете, почему и что делать.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: the Android crash',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Bug triage',
+          format: 'call',
+          lines: [
+            { who: 'Lena', text: "I reproduced it. The app crashes on phones that are older than five years. They don't have enough memory." },
+            { who: 'You', text: "Is the map too heavy for them?" },
+            { who: 'Lena', text: 'Yes. The map uses so much memory that the browser kills the tab. It was such a fast crash that I almost missed it.' },
+            { who: 'Arjun', text: "Our bundle is too big. 4 MB of JavaScript is too much for a cheap phone." },
+            { who: 'You', text: "The clusters aren't light enough either. I could load a simpler map on old devices." },
+            { who: 'Ken', text: "Is the CDN fast enough? Some drivers are in areas with such bad internet." },
+            { who: 'Lena', text: "The CDN is OK. The problem is the device. It's so slow that even scrolling hurts." },
+            { who: 'Maya', text: "How many users have such old phones?" },
+            { who: 'Lena', text: "About 8% of drivers. That's too many to ignore." },
+            { who: 'Maya', text: "Agreed. Let's make a light mode. Is two weeks enough time?" },
+            { who: 'You', text: "Two weeks should be enough if Arjun helps with the bundle." },
+          ],
+        },
+        { kind: 'choice', prompt: 'Which phones does the app crash on?', options: ['All phones', 'Phones older than five years', 'iPhones', 'Tablets'], answer: 1 },
+        { kind: 'choice', prompt: 'Why does the browser kill the tab?', options: ['The map uses so much memory', 'The internet is bad', 'The CDN is slow', 'Users close it'], answer: 0 },
+        { kind: 'choice', prompt: 'How big is the bundle?', options: ['400 KB', '4 MB', '40 MB', '1 MB'], answer: 1 },
+        { kind: 'choice', prompt: 'What percentage of drivers have old phones?', options: ['2%', '8%', '20%', '50%'], answer: 1 },
+        { kind: 'choice', prompt: "What is the plan?", options: ['Ignore it', 'Make a light mode in two weeks', 'Buy new phones', 'Change the CDN'], answer: 1 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: degree & result',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'too и enough',
+          body:
+            '**too + прилагательное** — «слишком» (больше нужного, это проблема): *The bundle is too big.*\n**too much / too many + существительное**: *too much JavaScript, too many requests.*\n' +
+            '**too … to do** — слишком …, чтобы: *It’s too heavy to load on old phones.*\n\n' +
+            '**прилагательное + enough** — «достаточно» (ставится **после** прилагательного!): *fast enough, light enough.*\n**enough + существительное** — ставится **перед** существительным: *enough memory, enough time.*\n**not … enough** — недостаточно: *The clusters aren’t light enough.*',
+          table: [
+            ['Конструкция', 'Пример'],
+            ['too + adj', 'The bundle is **too big**.'],
+            ['too much / many + noun', '**too much** memory, **too many** requests'],
+            ['adj + enough', 'Is the CDN **fast enough**?'],
+            ['enough + noun', "They don't have **enough memory**."],
+            ['too … to', "It's **too slow to** use."],
+          ],
+          pitfalls: [
+            { wrong: 'enough fast', right: 'fast enough' },
+            { wrong: 'memory enough', right: 'enough memory' },
+            { wrong: 'It is too much big.', right: 'It is too big. / It is much too big.' },
+            { wrong: 'very much requests', right: 'too many requests / a lot of requests' },
+          ],
+        },
+        {
+          kind: 'theory',
+          title: 'so и such: «такой… что»',
+          body:
+            '**so + прилагательное / наречие**: *It’s so slow. It loads so slowly.*\n**so much / so many + существительное**: *so much memory, so many users.*\n**such (a/an) + (прилагательное) + существительное**: *such a fast crash, such bad internet, such old phones.*\n\n' +
+            'Результат вводится через **that**: *It was so slow that even scrolling hurt. It was such a fast crash that I almost missed it.*\n\n' +
+            'Запомни: *so* стоит без существительного, а *such* — с существительным.',
+          pitfalls: [
+            { wrong: 'It was so a fast crash.', right: 'It was such a fast crash.' },
+            { wrong: 'such slow', right: 'so slow' },
+            { wrong: 'such much memory', right: 'so much memory' },
+            { wrong: 'It is such interesting project.', right: 'It is such an interesting project.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'Our bundle is ___ big for cheap phones.', options: ['too', 'enough', 'such', 'so much'], answer: 0 },
+        { kind: 'choice', prompt: "Old phones don't have ___ .", options: ['memory enough', 'enough memory', 'too memory', 'such memory'], answer: 1 },
+        { kind: 'choice', prompt: 'Is the CDN ___ ?', options: ['enough fast', 'fast enough', 'too enough', 'so fast enough'], answer: 1 },
+        { kind: 'choice', prompt: 'It was ___ fast crash that I almost missed it.', options: ['so a', 'such a', 'too a', 'a so'], answer: 1 },
+        { kind: 'choice', prompt: 'The map uses ___ memory that the browser kills the tab.', options: ['such', 'so much', 'so many', 'too'], answer: 1 },
+        { kind: 'choice', prompt: '8% of drivers is ___ to ignore.', options: ['too many', 'too much', 'enough many', 'so much'], answer: 0 },
+        { kind: 'choice', prompt: "It's ___ slow that even scrolling hurts.", options: ['such', 'so', 'too', 'enough'], answer: 1 },
+        { kind: 'choice', prompt: 'We have ___ old phones in the test lab!', options: ['so', 'such', 'too much', 'enough of'], answer: 1 },
+        { kind: 'gap', text: '4 MB of JavaScript is ___ much for a cheap phone.', answers: ['too'] },
+        { kind: 'gap', text: 'Is two weeks ___ time? (достаточно)', answers: ['enough'] },
+        { kind: 'gap', text: "The clusters aren't light ___ .", answers: ['enough'] },
+        { kind: 'gap', text: 'Some drivers have ___ bad internet!', answers: ['such'] },
+        { kind: 'gap', text: 'The phone is ___ old to run the new map.', answers: ['too'] },
+        { kind: 'gap', text: 'There were ___ many errors that the alerts went crazy.', answers: ['so'] },
+        { kind: 'gap', text: 'It was ___ a long meeting that I forgot the beginning.', answers: ['such'] },
+        { kind: 'transform', instruction: 'Соедини с so … that', source: 'The page was very slow. Users left.', answers: ['The page was so slow that users left.'] },
+        { kind: 'transform', instruction: 'Соедини с such … that', source: 'It was a big release. We celebrated for a week.', answers: ['It was such a big release that we celebrated for a week.'] },
+        { kind: 'transform', instruction: 'Перепиши с too … to', source: 'The bundle is very heavy. Old phones cannot load it.', answers: ['The bundle is too heavy for old phones to load.', 'The bundle is too heavy to load on old phones.'] },
+        { kind: 'transform', instruction: 'Перепиши с not … enough', source: 'The server is too slow.', answers: ["The server isn't fast enough.", 'The server is not fast enough.'] },
+        { kind: 'fix', sentence: 'The test is enough good.', answers: ['The test is good enough.'] },
+        { kind: 'fix', sentence: "We don't have time enough.", answers: ["We don't have enough time.", 'We do not have enough time.'] },
+        { kind: 'fix', sentence: 'It was so a nice demo.', answers: ['It was such a nice demo.'] },
+        { kind: 'fix', sentence: 'There are too much bugs.', answers: ['There are too many bugs.'] },
+        { kind: 'fix', sentence: 'The API is such slow today.', answers: ['The API is so slow today.'] },
+        { kind: 'order', words: ['The', 'bundle', 'is', 'too', 'big', '.'], ru: 'Бандл слишком большой.' },
+        { kind: 'order', words: ['Is', 'two', 'weeks', 'enough', 'time', '?'], ru: 'Двух недель достаточно?' },
+        { kind: 'order', words: ['It', 'was', 'such', 'a', 'fast', 'crash', '.'], ru: 'Это был такой быстрый краш.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: mobile performance',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'bundle', ru: 'бандл, собранный JS', example: 'Our bundle is 4 MB.' },
+            { chunk: 'heavy', ru: 'тяжёлый', example: 'The map is too heavy.' },
+            { chunk: 'light mode', ru: 'облегчённый режим', example: "Let's make a light mode." },
+            { chunk: 'kills the tab', ru: 'убивает вкладку', example: 'The browser kills the tab.' },
+            { chunk: 'low-end devices', ru: 'бюджетные устройства', example: 'Test on low-end devices too.' },
+            { chunk: 'lazy loading', ru: 'ленивая загрузка', example: 'Use lazy loading for the map.' },
+            { chunk: 'code splitting', ru: 'разделение кода', example: 'Code splitting reduces the bundle.' },
+            { chunk: 'to ignore', ru: 'чтобы игнорировать', example: "8% is too many to ignore." },
+            { chunk: 'reproduced', ru: 'воспроизвёл(а)', example: 'Lena reproduced the crash.' },
+            { chunk: 'triage', ru: 'разбор и сортировка багов', example: 'Bug triage is on Tuesdays.' },
+            { chunk: 'even', ru: 'даже', example: 'Even scrolling is slow.' },
+            { chunk: 'either', ru: 'тоже (в отрицании)', example: "The clusters aren't light enough either." },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['lazy loading', 'ленивая загрузка'],
+            ['low-end devices', 'бюджетные устройства'],
+            ['triage', 'разбор багов'],
+            ['heavy', 'тяжёлый'],
+            ['code splitting', 'разделение кода'],
+          ],
+        },
+        { kind: 'gap', text: 'Use ___ loading for images below the fold.', answers: ['lazy'] },
+        { kind: 'gap', text: 'Our ___ is too big. Let’s split it.', answers: ['bundle'] },
+        { kind: 'gap', text: "I don't like it ___ . (тоже не)", answers: ['either'] },
+        { kind: 'gap', text: '___ the login page is slow on that phone. (даже)', answers: ['Even'] },
+        { kind: 'gap', text: 'Always test on low-___ devices.', answers: ['end'] },
+        { kind: 'choice', prompt: '«Я тоже не знаю»:', options: ["I don't know either.", "I don't know too.", "I don't know also.", 'Me too not know.'], answer: 0 },
+        { kind: 'choice', prompt: 'Что уменьшает начальный бандл?', options: ['code splitting', 'more libraries', 'bigger images', 'inline everything'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: "They don't have enough memory." },
+        { kind: 'dictation', text: 'Is the map too heavy for them?' },
+        { kind: 'dictation', text: 'It was such a fast crash that I almost missed it.' },
+        { kind: 'dictation', text: 'Our bundle is too big.' },
+        { kind: 'dictation', text: 'Is the CDN fast enough?' },
+        { kind: 'dictation', text: "That's too many to ignore." },
+        {
+          kind: 'theory',
+          title: 'Ударение в эмоциональных фразах',
+          body: 'В *so* и *such* при эмоции голос делает сильное ударение: *It’s **so** slow! It was **such** a mess!* Попробуй повторить с той же эмоцией: так звучит естественно.',
+        },
+        { kind: 'dictation', text: "It's so slow that even scrolling hurts." },
+        { kind: 'dictation', text: 'Two weeks should be enough.' },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: describe a problem',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: "The bundle is too big for cheap phones." },
+        { kind: 'shadow', text: "The clusters aren't light enough." },
+        { kind: 'shadow', text: "It was such a fast crash that I almost missed it." },
+        { kind: 'shadow', text: "Eight percent is too many to ignore." },
+        {
+          kind: 'speak',
+          situation: 'Опиши проблему с производительностью в каком-нибудь приложении: что слишком медленно, чего не хватает.',
+          keywords: ['too', 'enough', 'so'],
+          sample: "Our admin panel is too slow. The server doesn't have enough memory, and the tables are so big that the browser freezes.",
+        },
+        {
+          kind: 'speak',
+          situation: 'Отреагируй эмоционально на хорошую новость: релиз прошёл идеально (такой гладкий, что…).',
+          keywords: ['such a', 'that'],
+          sample: 'It was such a smooth release that nobody noticed it! I was so happy that I bought pizza for everyone.',
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: bug analysis',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Напиши комментарий-анализ к багу «App crashes on old Android phones»: причина, масштаб и предложение. Используй too, enough, so, such.',
+          checklist: [
+            '*too + adj / too much / too many*',
+            '*adj + enough / enough + noun*',
+            '*so … that* или *such … that*',
+            'Есть предложение решения',
+          ],
+          minWords: 45,
+          sample:
+            "Analysis: the app crashes on phones older than five years. They don't have enough memory, and our 4 MB bundle is too big for them. The map uses so much memory that the browser kills the tab. About 8% of drivers use such old phones, which is too many to ignore. Proposal: a light mode with a simpler map and code splitting. Two weeks should be enough.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
