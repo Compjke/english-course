@@ -14,6 +14,7 @@ export const CAST: Record<string, { role: string; voice: 'us' | 'gb'; color: str
   You: { role: 'Frontend Developer (это ты)', voice: 'us', color: 'var(--text)' },
   Client: { role: 'Client', voice: 'gb', color: '#d9534f' },
   Kate: { role: 'HR Partner', voice: 'us', color: '#c2702a' },
+  Nina: { role: 'Frontend Intern', voice: 'gb', color: '#2a9bb5' },
 };
 
 export const COMPANY = 'Brightloop';
