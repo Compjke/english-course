@@ -1,0 +1,210 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b1p-18',
+  level: 'B1+',
+  title: 'Day 58: We should have asked earlier',
+  grammar: "should have / shouldn't have / could have / needn't have done",
+  scene: 'Конфликт синхронизации стёр заметки водителей. Ты разбираешь это с Nina без обвинений.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: lost notes',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: '1:1 with Nina',
+          format: 'call',
+          lines: [
+            { who: 'Nina', text: "I feel terrible. My sync change deleted the notes of twelve drivers. I should have tested it with two devices." },
+            { who: 'You', text: "Yes, you should have, but I should have reviewed it more carefully too. It's a team mistake." },
+            { who: 'Nina', text: "I also shouldn't have merged it on Friday evening." },
+            { who: 'You', text: "True. And you could have asked me. I was online until seven." },
+            { who: 'Nina', text: "I didn't want to bother you. I thought it was a small change." },
+            { who: 'You', text: "You needn't have worried about bothering me. That's my job as your mentor." },
+            { who: 'Nina', text: "Could we have restored the notes?" },
+            { who: 'You', text: "We could have, if the notes had been in the backup. Unfortunately, they were stored only on the phones." },
+            { who: 'Nina', text: "So the drivers lost them for good?" },
+            { who: 'You', text: "Most of them, yes. We've apologised, and Arjun is adding server backups for notes. Now let's write the tests you should have written. Together." },
+          ],
+        },
+        { kind: 'choice', prompt: 'What happened?', options: ["Nina's sync change deleted drivers' notes", 'The server crashed', 'The app was rejected', 'Nothing'], answer: 0 },
+        { kind: 'choice', prompt: 'What should Nina have done?', options: ['Tested with two devices', 'Worked faster', 'Asked the client', 'Deployed earlier'], answer: 0 },
+        { kind: 'choice', prompt: 'What should you have done?', options: ['Reviewed it more carefully', 'Fired Nina', 'Nothing', 'Deployed it yourself'], answer: 0 },
+        { kind: 'choice', prompt: 'Why couldn’t they restore the notes?', options: ['They were only on the phones', 'The backup was deleted', 'Nobody tried', 'They could'], answer: 0 },
+        { kind: 'choice', prompt: 'What will you do now?', options: ['Write the missing tests together', 'Blame Nina', 'Go home', 'Ignore it'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: past regrets & criticism',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'should have done / shouldn’t have done',
+          body:
+            '**should have + V3** — it was the right thing to do, but it **didn’t happen** (regret or criticism):\n*I should have tested it with two devices.* (I didn’t test it.)\n\n' +
+            '**shouldn’t have + V3** — it happened, but it was a **mistake**:\n*I shouldn’t have merged it on Friday.* (I merged it.)\n\n' +
+            'Use it about yourself (regret) or carefully about others (criticism). In a blameless culture, *we should have…* sounds better than *you should have…*.',
+          examples: ['I should have reviewed it more carefully.', "We shouldn't have released on Friday.", 'You should have asked me.'],
+        },
+        {
+          kind: 'theory',
+          title: "could have / needn't have",
+          body:
+            '**could have + V3** — it was **possible**, but it didn’t happen. Often a gentle criticism or a missed chance: *You could have asked me.* *We could have restored them if…*\n\n' +
+            '**needn’t have + V3** — you did it, but it **wasn’t necessary** (wasted effort): *You needn’t have worried.* (You worried, but there was no reason.)\n\n' +
+            'Compare: *didn’t need to + V* — it wasn’t necessary, **and you probably didn’t do it**: *I didn’t need to wait, so I left.*',
+          table: [
+            ['Form', 'Meaning', 'Example'],
+            ['should have done', "right thing, didn't happen", 'I **should have tested** it.'],
+            ["shouldn't have done", 'happened, was a mistake', "I **shouldn't have merged** it."],
+            ['could have done', 'possible, not done', 'You **could have asked** me.'],
+            ["needn't have done", 'done, not necessary', "You **needn't have worried**."],
+            ["didn't need to do", 'not necessary (not done)', "I **didn't need to** come in."],
+          ],
+          pitfalls: [
+            { wrong: 'I should tested it.', right: 'I should have tested it.' },
+            { wrong: 'I should have test it.', right: 'I should have tested it.' },
+            { wrong: 'You should of asked me.', right: 'You should have asked me.' },
+            { wrong: "You mustn't have worried.", right: "You needn't have worried." },
+          ],
+        },
+        { kind: 'choice', prompt: "I didn't test it with two devices. I ___ it.", options: ['should test', 'should have tested', 'should tested', 'must test'], answer: 1 },
+        { kind: 'choice', prompt: "I merged it on Friday. It was a mistake. I ___ it on Friday.", options: ["shouldn't merge", "shouldn't have merged", "mustn't have merged", "needn't merge"], answer: 1 },
+        { kind: 'choice', prompt: 'I was online. You ___ me!', options: ['could have asked', 'could ask yesterday', 'can have asked', 'should asked'], answer: 0 },
+        { kind: 'choice', prompt: "You worried about bothering me, but it wasn't necessary. You ___ .", options: ["needn't have worried", "shouldn't worry", "didn't need worry", "mustn't have worried"], answer: 0 },
+        { kind: 'choice', prompt: 'The meeting was cancelled, so I ___ come to the office. I stayed home.', options: ["needn't have", "didn't need to", "shouldn't have", "couldn't have"], answer: 1 },
+        { kind: 'choice', prompt: 'Which sentence is the most "blameless"?', options: ['You should have tested it!', 'We should have had better tests.', 'You always break things.', 'Nina broke it.'], answer: 1 },
+        { kind: 'choice', prompt: "I came to the office, but nobody was there. I ___ come.", options: ["needn't have", "didn't need to", "couldn't", "mustn't have"], answer: 0 },
+        { kind: 'gap', text: 'I should have ___ (review) it more carefully.', answers: ['reviewed'] },
+        { kind: 'gap', text: "We shouldn't have ___ (release) without QA sign-off.", answers: ['released'] },
+        { kind: 'gap', text: 'You could have ___ (tell) me earlier!', answers: ['told'] },
+        { kind: 'gap', text: "You ___ have brought a laptop; we have spare ones. (not necessary)", answers: ["needn't", 'need not'] },
+        { kind: 'gap', text: 'I ___ have backed up the notes on the server. (regret)', answers: ['should'] },
+        { kind: 'gap', text: "Ken ___ have restarted the DB during the day. It was a mistake.", answers: ["shouldn't", 'should not'] },
+        { kind: 'gap', text: 'We could have ___ (avoid) the incident with one more test.', answers: ['avoided'] },
+        { kind: 'transform', instruction: 'Regret with should have', source: "I didn't write tests for the sync.", answers: ['I should have written tests for the sync.'] },
+        { kind: 'transform', instruction: "Mistake with shouldn't have", source: 'We deployed at 6 pm on Friday.', answers: ["We shouldn't have deployed at 6 pm on Friday.", 'We should not have deployed at 6 pm on Friday.'] },
+        { kind: 'transform', instruction: 'Gentle criticism with could have', source: "You didn't ask for help, but I was available.", answers: ['You could have asked for help.', 'You could have asked me for help.'] },
+        { kind: 'transform', instruction: "Unnecessary action with needn't have", source: 'Lena printed the report, but everyone read it online.', answers: ["Lena needn't have printed the report.", 'Lena need not have printed the report.'] },
+        { kind: 'fix', sentence: 'I should tested it on a real device.', answers: ['I should have tested it on a real device.'] },
+        { kind: 'fix', sentence: 'You should of told me.', answers: ['You should have told me.'] },
+        { kind: 'fix', sentence: "We shouldn't have release it so early.", answers: ["We shouldn't have released it so early."] },
+        { kind: 'fix', sentence: "You mustn't have worried, it was fine.", answers: ["You needn't have worried, it was fine.", "You didn't need to worry, it was fine."] },
+        { kind: 'fix', sentence: 'He could has asked Arjun.', answers: ['He could have asked Arjun.'] },
+        { kind: 'order', words: ['I', 'should', 'have', 'tested', 'it', '.'], ru: 'Мне следовало это протестировать.' },
+        { kind: 'order', words: ['We', "shouldn't", 'have', 'merged', 'it', '.'], ru: 'Не надо было нам это мержить.' },
+        { kind: 'order', words: ['You', "needn't", 'have', 'worried', '.'], ru: 'Зря ты волновался.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: mistakes & mentoring',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'I feel terrible', ru: 'мне ужасно неловко', example: 'I feel terrible about the bug.' },
+            { chunk: 'team mistake', ru: 'ошибка команды', example: "It's a team mistake, not yours." },
+            { chunk: 'for good', ru: 'навсегда', example: 'The notes are lost for good.' },
+            { chunk: 'apologised', ru: 'извинились', example: "We've apologised to the drivers." },
+            { chunk: 'bother', ru: 'беспокоить', example: "I didn't want to bother you." },
+            { chunk: 'mentor', ru: 'наставник', example: "That's my job as your mentor." },
+            { chunk: 'learn from it', ru: 'учиться на этом', example: "Let's learn from it." },
+            { chunk: 'it happens', ru: 'бывает', example: "Don't worry, it happens." },
+            { chunk: 'own the mistake', ru: 'признать ошибку', example: 'It is important to own the mistake.' },
+            { chunk: 'psychological safety', ru: 'психологическая безопасность', example: 'Good teams have psychological safety.' },
+            { chunk: 'unfortunately', ru: 'к сожалению', example: 'Unfortunately, there was no backup.' },
+            { chunk: 'together', ru: 'вместе', example: "Let's write the tests together." },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['for good', 'навсегда'],
+            ['own the mistake', 'признать ошибку'],
+            ['it happens', 'бывает'],
+            ['unfortunately', 'к сожалению'],
+            ['psychological safety', 'психологическая безопасность'],
+          ],
+        },
+        { kind: 'gap', text: "Don't worry, it ___ . Everyone breaks something.", answers: ['happens'] },
+        { kind: 'gap', text: 'The data was deleted for ___ .', answers: ['good'] },
+        { kind: 'gap', text: 'Nina owned the ___ and fixed it fast.', answers: ['mistake'] },
+        { kind: 'gap', text: "I didn't want to ___ you on a Friday evening.", answers: ['bother'] },
+        { kind: 'gap', text: "Let's learn ___ it and add a test.", answers: ['from'] },
+        { kind: 'choice', prompt: 'Your intern made a big mistake. Best first reaction:', options: ["It happens. Let's look at what went wrong and fix it together.", 'How could you?!', "You're fired.", 'I told you so.'], answer: 0 },
+        { kind: 'choice', prompt: '"Psychological safety" in a team means…', options: ['people can admit mistakes without fear', 'nobody makes mistakes', 'there is a doctor', 'the office is safe'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'I should have tested it with two devices.' },
+        { kind: 'dictation', text: "I shouldn't have merged it on Friday evening." },
+        { kind: 'dictation', text: 'You could have asked me.' },
+        { kind: 'dictation', text: "You needn't have worried about bothering me." },
+        { kind: 'dictation', text: "It's a team mistake." },
+        { kind: 'dictation', text: 'The notes are lost for good.' },
+        {
+          kind: 'theory',
+          title: "should've, could've ≠ should of",
+          body: '*should have* sounds like [ˈʃʊdəv], *could have* like [ˈkʊdəv], *shouldn’t have* like [ˈʃʊdntəv]. In writing, use **should have / should’ve**, never *should of*.',
+        },
+        { kind: 'dictation', text: "We should've had better tests." },
+        { kind: 'dictation', text: "Don't worry, it happens." },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: own the mistake',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: 'I should have tested it with two devices.' },
+        { kind: 'shadow', text: "We shouldn't have merged it on Friday evening." },
+        { kind: 'shadow', text: "You could have asked me. I was online." },
+        { kind: 'shadow', text: "You needn't have worried. That's my job." },
+        {
+          kind: 'speak',
+          situation: 'Talk about a mistake you made at work or in studies: what you should have done and what you shouldn’t have done.',
+          keywords: ['should have', "shouldn't have"],
+          sample: "Last year I promised a feature in two days. I should have asked more questions first, and I shouldn't have said yes so quickly.",
+        },
+        {
+          kind: 'speak',
+          situation: 'As a mentor, comfort a junior who broke something. Mention what could have been done and that some worries were unnecessary.',
+          keywords: ['could have', "needn't have"],
+          sample: "It happens to everyone. You could have asked me, but you needn't have stayed up all night fixing it. Let's add a test together.",
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: apology to users',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Write two short texts: 1) an internal "what we should have done" note for the team (blameless), 2) a short apology message to the affected drivers.',
+          checklist: [
+            '*should have / shouldn’t have* in the internal note',
+            '*we* instead of *you / Nina* (blameless)',
+            'Clear, simple apology for drivers',
+            'What will change',
+          ],
+          minWords: 60,
+          sample:
+            "Internal note: We should have tested the sync change with two devices before merging. We shouldn't have released on Friday evening, and we should have backed up notes on the server. Next steps: server backups for notes and a two-device sync test in CI.\n\nMessage to drivers: We're very sorry. A bug in our last update deleted some of your notes, and unfortunately we couldn't restore them. We have fixed the bug, and from now on your notes are also saved on our servers.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
