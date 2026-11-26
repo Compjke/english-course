@@ -1,0 +1,293 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'a2-01',
+  level: 'A2',
+  title: 'Day 1: Welcome to Brightloop',
+  grammar: 'to be, порядок слов',
+  scene: 'Первый рабочий день. Maya знакомит тебя с командой.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: first morning',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Video call, 9:30 am',
+          format: 'call',
+          lines: [
+            { who: 'Maya', text: "Good morning and welcome to Brightloop! I'm Maya, the engineering manager." },
+            { who: 'You', text: "Hi Maya, nice to meet you. I'm the new frontend developer." },
+            { who: 'Maya', text: "Great. This is Arjun. He's a senior backend developer. He's in London." },
+            { who: 'Arjun', text: 'Hi! Welcome on board. Are you in Warsaw?' },
+            { who: 'You', text: "No, I'm not. I'm in Kraków, but our office is in Warsaw." },
+            { who: 'Maya', text: "And this is Lena. She's our QA engineer. Lena and Arjun are both in the Delivery team." },
+            { who: 'Lena', text: "Hello! Don't worry, we aren't scary. Is your laptop ready?" },
+            { who: 'You', text: "Yes, it is. But my access to GitLab isn't ready yet." },
+            { who: 'Maya', text: "No problem. Ken is our DevOps engineer. He's online at ten. Your first task is simple: set up the project." },
+          ],
+        },
+        {
+          kind: 'choice',
+          prompt: 'What is Maya’s job?',
+          options: ['QA engineer', 'Engineering manager', 'Backend developer', 'DevOps engineer'],
+          answer: 1,
+        },
+        {
+          kind: 'choice',
+          prompt: 'Where is Arjun?',
+          options: ['In Warsaw', 'In Kraków', 'In London', 'In Toronto'],
+          answer: 2,
+        },
+        {
+          kind: 'choice',
+          prompt: 'What is not ready yet?',
+          options: ['The laptop', 'The GitLab access', 'The office', 'The first task'],
+          answer: 1,
+        },
+        {
+          kind: 'choice',
+          prompt: 'Who is in the Delivery team?',
+          options: ['Only Maya', 'Lena and Arjun', 'Ken and Lena', 'You and Ken'],
+          answer: 1,
+        },
+        {
+          kind: 'choice',
+          prompt: 'Найди в диалоге: как сказать «Я не в Варшаве»?',
+          options: ["I'm not in Warsaw.", "I don't in Warsaw.", 'I not in Warsaw.', "I amn't in Warsaw."],
+          answer: 0,
+          explain: 'Отрицание с **be** строится через **not** после глагола: I am not = I’m not. Вспомогательный **do** с be не нужен.',
+        },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: the verb *to be*',
+      minutes: 20,
+      items: [
+        {
+          kind: 'theory',
+          title: 'Глагол to be: am / is / are',
+          body:
+            'В русском мы часто опускаем глагол-связку: «Я разработчик», «Сервер в Лондоне». В английском без глагола предложение не работает. Связку **be** надо ставить всегда: *I am a developer. The server is in London.*\n\n' +
+            '**Утверждение:** подлежащее + am/is/are + остальное.\n**Отрицание:** добавляем **not** после am/is/are.\n**Вопрос:** am/is/are выносим вперёд, перед подлежащим.\n\n' +
+            'В речи и в чатах почти всегда используют сокращения: *I’m, you’re, he’s, it’s, we’re, they’re, isn’t, aren’t*. Сокращения *amn’t* нет: говорят *I’m not*.',
+          table: [
+            ['', 'Утверждение', 'Отрицание', 'Вопрос'],
+            ['I', "I **am** (I'm)", "I'm **not**", '**Am** I…?'],
+            ['he / she / it', "it **is** (it's)", "it **isn't**", '**Is** it…?'],
+            ['you / we / they', "we **are** (we're)", "we **aren't**", '**Are** we…?'],
+          ],
+          examples: [
+            "I'm a frontend developer.",
+            "The build isn't green.",
+            'Are you on the Delivery team?',
+            'Is the API documentation up to date?',
+            "Lena and Arjun aren't in the office today.",
+          ],
+          pitfalls: [
+            { wrong: 'I developer.', right: "I'm a developer.", note: 'Связка обязательна. Перед профессией в единственном числе нужен **a/an**.' },
+            { wrong: 'He not ready.', right: "He isn't ready.", note: 'Отрицание: is + not.' },
+            { wrong: 'You are ready?', right: 'Are you ready?', note: 'В вопросе глагол идёт перед подлежащим, интонации мало.' },
+            { wrong: 'The tests is green.', right: 'The tests are green.', note: 'tests — множественное число, значит **are**.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'I ___ the new frontend developer.', options: ['is', 'am', 'are', 'be'], answer: 1 },
+        { kind: 'choice', prompt: 'The server ___ in Frankfurt.', options: ['are', 'am', 'is', 'be'], answer: 2 },
+        { kind: 'choice', prompt: 'Lena and Arjun ___ on the Delivery team.', options: ['is', 'are', 'am', 'be'], answer: 1 },
+        { kind: 'choice', prompt: '___ the tests green?', options: ['Is', 'Am', 'Are', 'Do'], answer: 2 },
+        { kind: 'choice', prompt: 'My access ___ ready yet.', options: ["aren't", "isn't", "amn't", "don't"], answer: 1 },
+        {
+          kind: 'choice',
+          prompt: 'Выбери правильный вопрос.',
+          options: ['You are from Poland?', 'Are you from Poland?', 'Do you are from Poland?', 'Are from Poland you?'],
+          answer: 1,
+        },
+        { kind: 'gap', text: 'Ken ___ our DevOps engineer.', answers: ['is', "'s"] },
+        { kind: 'gap', text: 'We ___ a small team of six people.', answers: ['are', "'re"] },
+        { kind: 'gap', text: 'I ___ not in the office today. I work from home.', answers: ['am', "'m"] },
+        { kind: 'gap', text: '___ the pipeline broken again?', answers: ['Is'] },
+        { kind: 'gap', text: 'The new laptops ___ very fast.', answers: ['are'] },
+        { kind: 'gap', text: 'It ___ my first day, so I have a lot of questions.', answers: ['is', "'s"] },
+        {
+          kind: 'transform',
+          instruction: 'Сделай отрицание (используй сокращение или полную форму)',
+          source: 'The bug is critical.',
+          answers: ["The bug isn't critical.", 'The bug is not critical.'],
+        },
+        {
+          kind: 'transform',
+          instruction: 'Сделай вопрос',
+          source: 'Arjun is in London.',
+          answers: ['Is Arjun in London?'],
+        },
+        {
+          kind: 'transform',
+          instruction: 'Сделай вопрос',
+          source: 'The designs are ready.',
+          answers: ['Are the designs ready?'],
+        },
+        {
+          kind: 'transform',
+          instruction: 'Сделай отрицание',
+          source: "I'm a backend developer.",
+          answers: ["I'm not a backend developer.", 'I am not a backend developer.'],
+        },
+        {
+          kind: 'transform',
+          instruction: 'Сделай отрицание',
+          source: 'We are on the same team.',
+          answers: ["We aren't on the same team.", 'We are not on the same team.', "We're not on the same team."],
+        },
+        {
+          kind: 'fix',
+          sentence: 'She QA engineer.',
+          answers: ["She's a QA engineer.", 'She is a QA engineer.'],
+          explain: 'Нужны связка **is** и артикль **a**.',
+        },
+        { kind: 'fix', sentence: 'The tests is red.', answers: ['The tests are red.'], explain: 'tests во множественном числе: **are**.' },
+        { kind: 'fix', sentence: 'You are new here?', answers: ['Are you new here?'], explain: 'В вопросе: **Are** you…?' },
+        { kind: 'fix', sentence: 'I not ready.', answers: ["I'm not ready.", 'I am not ready.'], explain: 'Без связки нельзя: *I am not* = *I’m not*. Формы *amn’t* тоже нет.' },
+        { kind: 'fix', sentence: 'He not in the meeting.', answers: ["He isn't in the meeting.", 'He is not in the meeting.', "He's not in the meeting."] },
+        { kind: 'order', words: ['Is', 'your', 'laptop', 'ready', '?'], ru: 'Твой ноутбук готов?' },
+        { kind: 'order', words: ['We', 'are', 'not', 'in', 'the', 'same', 'office', '.'], ru: 'Мы не в одном офисе.' },
+        { kind: 'order', words: ['The', 'documentation', 'is', 'on', 'Confluence', '.'], ru: 'Документация в Confluence.' },
+        { kind: 'order', words: ['Are', 'you', 'on', 'the', 'Delivery', 'team', '?'], ru: 'Ты в команде Delivery?' },
+        {
+          kind: 'theory',
+          title: 'Порядок слов: подлежащее всегда есть',
+          body:
+            'В английском порядок слов жёсткий: **подлежащее → глагол → остальное**. Подлежащее нельзя опустить, даже если оно понятно из контекста.\n\n' +
+            'Когда подлежащего «нет» (погода, время, оценка), ставят формальное **it**: *It’s ten o’clock. It’s a good idea. It’s broken.* Рус. «Сломано» → *It’s broken.* «Готово!» → *It’s ready!* или просто *Done!*',
+          examples: ["It's ten o'clock in London.", "It's a big project.", "Is it ready? Yes, it's ready."],
+          pitfalls: [
+            { wrong: 'Is ready.', right: "It's ready." },
+            { wrong: 'Is a good idea.', right: "It's a good idea." },
+          ],
+        },
+        { kind: 'gap', text: '— Is the fix deployed? — Yes, ___ deployed.', answers: ["it's", 'it is'] },
+        { kind: 'gap', text: '___ nine o’clock, time for the standup.', answers: ["It's", 'It is'] },
+        {
+          kind: 'choice',
+          prompt: 'Как сказать «Это хорошая идея»?',
+          options: ['Is a good idea.', "It's a good idea.", 'This good idea.', 'Good idea is.'],
+          answer: 1,
+        },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: people and onboarding',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'welcome on board', ru: 'добро пожаловать (в команду)', example: 'Hi, and welcome on board!' },
+            { chunk: 'nice to meet you', ru: 'приятно познакомиться', example: 'Hi Maya, nice to meet you.' },
+            { chunk: 'engineering manager', ru: 'руководитель разработки', example: 'Maya is our engineering manager.' },
+            { chunk: 'QA engineer', ru: 'тестировщик', example: 'Lena is a QA engineer.' },
+            { chunk: 'set up the project', ru: 'развернуть проект локально', example: 'Your first task is to set up the project.' },
+            { chunk: 'access to', ru: 'доступ к', example: "My access to GitLab isn't ready yet." },
+            { chunk: 'work from home', ru: 'работать из дома', example: 'On Fridays I work from home.' },
+            { chunk: 'is online', ru: 'в сети, на связи', example: 'Ken is online at ten.' },
+            { chunk: 'on the same team', ru: 'в одной команде', example: 'We are on the same team.' },
+            { chunk: 'up to date', ru: 'актуальный', example: 'Is the README up to date?' },
+            { chunk: 'onboarding', ru: 'адаптация новичка', example: 'Your onboarding takes two weeks.' },
+            { chunk: 'a lot of questions', ru: 'много вопросов', example: 'I have a lot of questions about the API.' },
+          ],
+        },
+        {
+          kind: 'match',
+          prompt: 'Сопоставь фразу и перевод',
+          pairs: [
+            ['welcome on board', 'добро пожаловать в команду'],
+            ['set up the project', 'развернуть проект'],
+            ['up to date', 'актуальный'],
+            ['access to', 'доступ к'],
+            ['work from home', 'работать из дома'],
+          ],
+        },
+        { kind: 'gap', text: 'Hi Lena, nice to ___ you.', answers: ['meet'] },
+        { kind: 'gap', text: 'I need ___ to the staging server.', answers: ['access'] },
+        { kind: 'gap', text: 'Is the documentation up to ___ ?', answers: ['date'] },
+        { kind: 'gap', text: 'Arjun and I are on the same ___ .', answers: ['team'] },
+        { kind: 'gap', text: 'First, please set ___ the project on your laptop.', answers: ['up'] },
+        {
+          kind: 'choice',
+          prompt: 'Новичку в первый день говорят…',
+          options: ['Welcome on board!', 'Good luck with that.', 'See you later.', 'Nice job!'],
+          answer: 0,
+        },
+        { kind: 'gap', text: 'Your ___ plan is on Confluence: two weeks of tasks for new people.', answers: ['onboarding'] },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: "I'm the new frontend developer." },
+        { kind: 'dictation', text: 'Arjun is in London.' },
+        { kind: 'dictation', text: "My access to GitLab isn't ready yet." },
+        { kind: 'dictation', text: 'Are you on the Delivery team?' },
+        { kind: 'dictation', text: 'The tests are green.' },
+        { kind: 'dictation', text: "It's my first day." },
+        {
+          kind: 'theory',
+          title: 'Spelling: IT-слова, которые часто пишут с ошибкой',
+          body:
+            'Обрати внимание на написание: **developer** (одна *l*, одна *p*), **engineer** (*-eer* на конце), **access** (две *c*, две *s*), **environment** (не забудь *n* перед *m*), **address** (две *d*, две *s*).',
+        },
+        { kind: 'dictation', text: 'The developer needs access.' },
+        { kind: 'dictation', text: 'She is a QA engineer.' },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: introduce yourself',
+      minutes: 10,
+      items: [
+        { kind: 'shadow', text: "Hi, I'm the new frontend developer. Nice to meet you." },
+        { kind: 'shadow', text: "This is Arjun. He's a senior backend developer." },
+        { kind: 'shadow', text: "My access isn't ready yet." },
+        { kind: 'shadow', text: 'Are you on the Delivery team?' },
+        {
+          kind: 'speak',
+          situation: 'Ты на первом звонке с командой. Представься: имя, роль, город. Скажи, что рад(а) знакомству.',
+          keywords: ["I'm", 'developer', 'nice to meet you'],
+          sample: "Hi everyone, I'm Alex. I'm the new frontend developer. I'm in Kraków. Nice to meet you!",
+        },
+        {
+          kind: 'speak',
+          situation: 'Maya спрашивает: «Is everything ready for work?» Ответь: ноутбук готов, но доступа к GitLab ещё нет.',
+          keywords: ['laptop is ready', "isn't ready", 'access'],
+          sample: "My laptop is ready, but my access to GitLab isn't ready yet.",
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: hello in Slack',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Напиши приветственное сообщение в общий канал Slack #delivery-team: кто ты, какая у тебя роль, где ты находишься и что сегодня делаешь (set up the project). 3–5 предложений.',
+          checklist: [
+            'Есть приветствие (Hi everyone / Hello team)',
+            'Есть связка **am/is/are** в каждом предложении о себе',
+            'Есть хотя бы одно отрицание (*isn’t / aren’t / I’m not*)',
+            'В конце дружелюбная фраза (Nice to meet you all!)',
+          ],
+          minWords: 25,
+          sample:
+            "Hi everyone! I'm Alex, the new frontend developer on the Delivery team. I'm in Kraków, so I'm not in the office with you, but I'm online every day from 9 to 6. Today I'm busy with the project setup. My GitLab access isn't ready yet, so Ken, please ping me when it is. Nice to meet you all!",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;

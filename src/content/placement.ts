@@ -1,0 +1,55 @@
+import type { ChoiceEx, Level } from '../engine/types';
+
+/** 8 questions per level; passing a level needs 6/8. */
+export const PLACEMENT: Record<Level, ChoiceEx[]> = {
+  A2: [
+    { kind: 'choice', prompt: 'Our team ___ a standup every morning at 10.', options: ['have', 'has', 'is having', 'having'], answer: 1 },
+    { kind: 'choice', prompt: '___ you use Git at your last job?', options: ['Do', 'Were', 'Did', 'Have'], answer: 2 },
+    { kind: 'choice', prompt: 'Look! The build ___ again.', options: ['fails', 'is failing', 'fail', 'failed yesterday'], answer: 1 },
+    { kind: 'choice', prompt: 'There ___ two bugs in this ticket.', options: ['is', 'are', 'be', 'has'], answer: 1 },
+    { kind: 'choice', prompt: 'This laptop is ___ than my old one.', options: ['more fast', 'faster', 'fastest', 'more faster'], answer: 1 },
+    { kind: 'choice', prompt: "We don't have ___ time before the release.", options: ['many', 'much', 'a few', 'few'], answer: 1 },
+    { kind: 'choice', prompt: 'The meeting is ___ Monday ___ 3 pm.', options: ['in / at', 'on / at', 'at / on', 'on / in'], answer: 1 },
+    { kind: 'choice', prompt: 'I think the new version ___ ready next week.', options: ['is being', 'will be', 'be', 'going to'], answer: 1 },
+  ],
+  B1: [
+    { kind: 'choice', prompt: 'I ___ on this project since March.', options: ['work', 'am working', 'have been working', 'worked'], answer: 2 },
+    { kind: 'choice', prompt: 'If the tests pass, we ___ the code today.', options: ['merge', 'will merge', 'would merge', 'merged'], answer: 1 },
+    { kind: 'choice', prompt: 'The bug ___ by Lena yesterday.', options: ['found', 'was found', 'has found', 'is finding'], answer: 1 },
+    { kind: 'choice', prompt: 'I was debugging the API when the server ___ .', options: ['was crashing', 'crashed', 'has crashed', 'crashes'], answer: 1 },
+    { kind: 'choice', prompt: 'We ___ use SVN, but now we use Git.', options: ['used to', 'use to', 'were used to', 'got used'], answer: 0 },
+    { kind: 'choice', prompt: 'You ___ commit passwords to the repository. Never!', options: ["don't have to", "mustn't", "needn't", "shouldn't have"], answer: 1 },
+    { kind: 'choice', prompt: 'The developer ___ wrote this module has left the company.', options: ['which', 'who', 'whose', 'what'], answer: 1 },
+    { kind: 'choice', prompt: 'I enjoy ___ complex problems.', options: ['to solve', 'solve', 'solving', 'solved'], answer: 2 },
+  ],
+  'B1+': [
+    { kind: 'choice', prompt: 'When I joined the call, the client ___ already ___ .', options: ['has / left', 'had / left', 'was / leaving', 'did / leave'], answer: 1 },
+    { kind: 'choice', prompt: 'If we ___ the logs, we would have found the issue earlier.', options: ['checked', 'had checked', 'would check', 'have checked'], answer: 1 },
+    { kind: 'choice', prompt: 'The service is down. Someone ___ changed the config.', options: ['must have', 'should', 'can have', 'must'], answer: 0 },
+    { kind: 'choice', prompt: 'She asked me where ___ .', options: ['is the bug', 'the bug was', 'was the bug', 'the bug is it'], answer: 1 },
+    { kind: 'choice', prompt: 'I wish I ___ more time for refactoring.', options: ['have', 'had', 'will have', 'would had'], answer: 1 },
+    { kind: 'choice', prompt: 'By Friday we ___ the migration.', options: ['will finish', 'will have finished', 'finish', 'are finishing'], answer: 1 },
+    { kind: 'choice', prompt: 'We need to get the servers ___ before the release.', options: ['update', 'updating', 'updated', 'to update'], answer: 2 },
+    { kind: 'choice', prompt: 'You reviewed my PR, ___ ?', options: ["didn't you", "haven't you", "weren't you", 'did you'], answer: 0 },
+  ],
+  B2: [
+    { kind: 'choice', prompt: 'Not only ___ the deadline, but we also exceeded the budget.', options: ['we missed', 'did we miss', 'we did miss', 'missed we'], answer: 1 },
+    { kind: 'choice', prompt: 'The new framework is said ___ much faster.', options: ['being', 'that it is', 'to be', 'be'], answer: 2 },
+    { kind: 'choice', prompt: '___ the documentation, I understood the problem.', options: ['Having read', 'Had read', 'Have read', 'To have read'], answer: 0 },
+    { kind: 'choice', prompt: "It's high time we ___ this legacy code.", options: ['rewrite', 'rewrote', 'will rewrite', 'have rewritten'], answer: 1 },
+    { kind: 'choice', prompt: '___ I need is a clear set of requirements.', options: ['That', 'Which', 'What', 'It'], answer: 2 },
+    { kind: 'choice', prompt: 'The more tests we write, ___ bugs we ship.', options: ['the less', 'the fewer', 'fewer', 'less'], answer: 1 },
+    { kind: 'choice', prompt: 'I would rather you ___ the main branch directly.', options: ["don't push", "didn't push", "not push", "won't push"], answer: 1 },
+    { kind: 'choice', prompt: 'This approach seems ___ (reliable) — it fails every other day.', options: ['unreliable', 'disreliable', 'inreliable', 'nonreliable'], answer: 0 },
+  ],
+  'B2+': [
+    { kind: 'choice', prompt: 'Which sentence sounds most diplomatic in a code review?', options: ['This is wrong.', 'You should rewrite this.', 'I wonder if we could simplify this part a bit.', 'Why did you do it like this?'], answer: 2 },
+    { kind: 'choice', prompt: 'Rarely ___ such a stable release.', options: ['we have seen', 'have we seen', 'we saw', 'seen we have'], answer: 1 },
+    { kind: 'choice', prompt: 'In a STAR answer, the "R" stands for…', options: ['Reason', 'Result', 'Review', 'Risk'], answer: 1 },
+    { kind: 'choice', prompt: 'Choose the best opening for a demo.', options: ["So, uh, let's start I guess.", "Today I'd like to walk you through the new tracking dashboard.", 'I will now present.', 'Here is a thing we made.'], answer: 1 },
+    { kind: 'choice', prompt: "Pushing back on a deadline: \"Given the scope, ___ realistic to deliver by Friday.\"", options: ["it isn't", "I'm not sure it's", 'never it is', "it won't be never"], answer: 1 },
+    { kind: 'choice', prompt: 'Had we known about the limit, we ___ a different database.', options: ['would choose', 'would have chosen', 'had chosen', 'will choose'], answer: 1 },
+    { kind: 'choice', prompt: 'Which word fits a formal design doc? "The service ___ requests to the queue."', options: ['throws', 'dispatches', 'shoots', 'gives'], answer: 1 },
+    { kind: 'choice', prompt: 'Summarising in a meeting: "So, ___ , we agreed to postpone the migration."', options: ['to sum up', 'to sum', 'sum up', 'summing'], answer: 0 },
+  ],
+};
