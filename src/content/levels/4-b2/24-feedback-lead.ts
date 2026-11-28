@@ -1,0 +1,211 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b2-24',
+  level: 'B2',
+  title: 'Day 84: Giving feedback as a lead',
+  grammar: 'Feedback language: SBI model, softeners, I-statements, future-focused suggestions',
+  scene: 'Nina стала Junior Developer. Ты проводишь с ней первое ревью эффективности.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: performance conversation',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: '1:1 with Nina',
+          format: 'call',
+          lines: [
+            { who: 'You', text: "Thanks for making time, Nina. I'd like to share some feedback, and then hear yours. Is that OK?" },
+            { who: 'Nina', text: "Sure, I'm a bit nervous, but go ahead." },
+            { who: 'You', text: "First, something I really appreciated: in last week's incident, you found the upload bug and explained it clearly to the whole team. That saved us hours." },
+            { who: 'Nina', text: "Thanks, that means a lot." },
+            { who: 'You', text: "One area to work on: in the sprint review on Tuesday, you presented the chat feature, but you skipped the edge cases. The client asked twice, and I noticed you looked unsure." },
+            { who: 'Nina', text: "Yes, I didn't feel prepared." },
+            { who: 'You', text: "That's completely normal. Going forward, it might help to write down three likely questions before each demo. Would you like to rehearse the next one with me?" },
+            { who: 'Nina', text: "That would be great. Can I give you feedback too?" },
+            { who: 'You', text: "Please do." },
+            { who: 'Nina', text: "Sometimes you review my PRs very late in the evening, and then I feel I have to answer at night." },
+            { who: 'You', text: "Thank you for telling me. I didn't realise that. I'll schedule my comments for the morning from now on." },
+          ],
+        },
+        { kind: 'choice', prompt: 'What did you appreciate about Nina?', options: ['She found and clearly explained the upload bug', 'She worked at night', 'She designed the app', 'Nothing'], answer: 0 },
+        { kind: 'choice', prompt: 'What is the area to work on?', options: ['Preparing for questions in demos', 'Writing code', 'Coming on time', 'Git'], answer: 0 },
+        { kind: 'choice', prompt: 'What do you suggest?', options: ['Writing down three likely questions before each demo', 'Avoiding demos', 'Talking faster', 'Asking the client to stop asking'], answer: 0 },
+        { kind: 'choice', prompt: 'What feedback does Nina give you?', options: ['Late-evening PR reviews put pressure on her', 'You talk too much', 'Your code is bad', 'Nothing'], answer: 0 },
+        { kind: 'choice', prompt: 'How do you react?', options: ['Thank her and change the habit', 'Get angry', 'Ignore it', 'Explain it is her problem'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Grammar: giving and receiving feedback',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'The SBI model',
+          body:
+            'Good feedback is **specific** and about **behaviour, not personality**. A popular structure is **SBI**:\n' +
+            '**Situation** — when and where: *In the sprint review on Tuesday, …*\n' +
+            '**Behaviour** — what exactly the person did (observable facts): *…you skipped the edge cases.*\n' +
+            '**Impact** — the effect: *The client asked twice, and it looked unprepared.*\n\n' +
+            'Then move to the **future**: *Going forward, it might help to… / Next time, how about…?*\n\n' +
+            'Avoid general labels: *You are disorganised* → *In the last two sprints, three tickets were not updated.*',
+        },
+        {
+          kind: 'theory',
+          title: 'Useful phrases',
+          table: [
+            ['Purpose', 'Phrases'],
+            ['open', "I'd like to share some feedback. Is now a good time?"],
+            ['positive', 'Something I really appreciated was… / You did a great job of + -ing'],
+            ['developmental', 'One area to work on… / One thing I noticed was…'],
+            ['suggestion', 'Going forward, it might help to… / How about trying…? / Would it help if…?'],
+            ['check understanding', 'How do you see it? / Does that make sense?'],
+            ['receive feedback', "Thank you for telling me. / I didn't realise that. / That's fair."],
+          ],
+          body: 'Past Simple for specific situations (*you skipped*), modal verbs for suggestions (*might help, could try*), and questions to make it a dialogue.',
+          pitfalls: [
+            { wrong: 'You are always unprepared.', right: 'In Tuesday’s review, you seemed unprepared for the edge-case questions.' },
+            { wrong: 'You did a great job of explain the bug.', right: 'You did a great job of explaining the bug.' },
+            { wrong: 'Going forward, it might help write questions.', right: 'Going forward, it might help to write questions.' },
+            { wrong: 'Thank you for tell me.', right: 'Thank you for telling me.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'Which feedback is specific (SBI)?', options: ["In Tuesday's review you skipped the edge cases, and the client asked twice.", 'You are bad at demos.', 'You never prepare.', 'Your presentations are weird.'], answer: 0 },
+        { kind: 'choice', prompt: 'You did a great job of ___ the bug.', options: ['explain', 'explaining', 'to explain', 'explained'], answer: 1 },
+        { kind: 'choice', prompt: 'Going forward, it might help ___ down three questions.', options: ['write', 'to write', 'writing', 'wrote'], answer: 1 },
+        { kind: 'choice', prompt: 'Best way to receive critical feedback:', options: ["Thank you for telling me. I didn't realise that.", "That's not true.", 'Whatever.', 'You do it too!'], answer: 0 },
+        { kind: 'choice', prompt: 'In SBI, "I" stands for…', options: ['Impact', 'Idea', 'Improvement', 'Intention'], answer: 0 },
+        { kind: 'choice', prompt: 'A future-focused suggestion:', options: ['How about rehearsing the next demo together?', 'You failed the demo.', 'Why did you do that?', 'Never do that again.'], answer: 0 },
+        { kind: 'choice', prompt: 'Opening a feedback conversation:', options: ["I'd like to share some feedback. Is now a good time?", 'Sit down, we need to talk.', 'You have a problem.', 'Listen to me.'], answer: 0 },
+        { kind: 'gap', text: 'Something I really ___ was your clear explanation. (valued)', answers: ['appreciated'] },
+        { kind: 'gap', text: 'One ___ to work on is preparing for questions.', answers: ['area'] },
+        { kind: 'gap', text: 'Thank you for ___ (tell) me.', answers: ['telling'] },
+        { kind: 'gap', text: 'How ___ trying a short rehearsal before each demo?', answers: ['about'] },
+        { kind: 'gap', text: 'Would it ___ if I reviewed your slides first?', answers: ['help'] },
+        { kind: 'gap', text: 'How do you ___ it? (asking for their view)', answers: ['see'] },
+        { kind: 'gap', text: "That's ___ . I'll change it. (accepting fair criticism)", answers: ['fair'] },
+        { kind: 'transform', instruction: 'Rewrite as specific SBI feedback', source: 'You are always late.', answers: ['You joined the last three standups late.', 'You were late for the last three standups.', 'In the last three standups, you joined late.'] },
+        { kind: 'transform', instruction: 'Rewrite as a soft suggestion with "it might help to"', source: 'Prepare questions before demos.', answers: ['Going forward, it might help to prepare questions before demos.', 'It might help to prepare questions before demos.'] },
+        { kind: 'transform', instruction: 'Rewrite as positive feedback with "You did a great job of"', source: 'You explained the bug well.', answers: ['You did a great job of explaining the bug.'] },
+        { kind: 'fix', sentence: 'You did a great job of organize the retro.', answers: ['You did a great job of organizing the retro.', 'You did a great job of organising the retro.'] },
+        { kind: 'fix', sentence: 'Thank you for tell me that.', answers: ['Thank you for telling me that.'] },
+        { kind: 'fix', sentence: 'It might help prepare earlier.', answers: ['It might help to prepare earlier.'] },
+        { kind: 'fix', sentence: 'How about to try a rehearsal?', answers: ['How about trying a rehearsal?'] },
+        { kind: 'fix', sentence: "I didn't realised that.", answers: ["I didn't realise that.", "I didn't realize that."] },
+        { kind: 'order', words: ['One', 'area', 'to', 'work', 'on', 'is', 'preparation', '.'], ru: 'Одна из зон роста — подготовка.' },
+        { kind: 'order', words: ['Thank', 'you', 'for', 'telling', 'me', '.'], ru: 'Спасибо, что сказал мне.' },
+        { kind: 'order', words: ['How', 'do', 'you', 'see', 'it', '?'], ru: 'Как ты это видишь?' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: people management',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'performance review', ru: 'оценка эффективности', example: "It's her first performance review." },
+            { chunk: 'thanks for making time', ru: 'спасибо, что нашёл время', example: 'Thanks for making time today.' },
+            { chunk: 'that means a lot', ru: 'это много значит', example: 'Thanks, that means a lot.' },
+            { chunk: 'area to work on', ru: 'зона роста', example: 'One area to work on is demos.' },
+            { chunk: 'going forward', ru: 'в дальнейшем', example: 'Going forward, rehearse demos.' },
+            { chunk: 'rehearse', ru: 'отрепетировать', example: 'Would you like to rehearse it?' },
+            { chunk: 'growth plan', ru: 'план развития', example: "Let's write a growth plan." },
+            { chunk: 'strengths', ru: 'сильные стороны', example: 'Debugging is one of her strengths.' },
+            { chunk: 'set goals', ru: 'ставить цели', example: "Let's set goals for the next quarter." },
+            { chunk: 'check in', ru: 'сверяться, созваниваться', example: "Let's check in every two weeks." },
+            { chunk: 'career ladder', ru: 'карьерная лестница', example: 'Our career ladder has five levels.' },
+            { chunk: 'feel prepared', ru: 'чувствовать себя готовым', example: "I didn't feel prepared." },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['going forward', 'в дальнейшем'],
+            ['growth plan', 'план развития'],
+            ['check in', 'сверяться'],
+            ['career ladder', 'карьерная лестница'],
+            ['rehearse', 'отрепетировать'],
+          ],
+        },
+        { kind: 'gap', text: "Let's check ___ every two weeks.", answers: ['in'] },
+        { kind: 'gap', text: 'Going ___ , let\'s rehearse every demo.', answers: ['forward'] },
+        { kind: 'gap', text: 'Thanks, that means a ___ .', answers: ['lot'] },
+        { kind: 'gap', text: "Let's ___ goals for the next quarter.", answers: ['set'] },
+        { kind: 'gap', text: 'Debugging is one of her ___ .', answers: ['strengths'] },
+        { kind: 'choice', prompt: 'A good feedback conversation is…', options: ['a two-way dialogue with specific examples', 'a monologue', 'a list of complaints', 'only praise'], answer: 0 },
+        { kind: 'choice', prompt: 'Feedback should focus on…', options: ['behaviour and impact', 'personality', 'appearance', 'rumours'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: "I'd like to share some feedback. Is that OK?" },
+        { kind: 'dictation', text: 'Something I really appreciated was your clear explanation.' },
+        { kind: 'dictation', text: 'One area to work on is preparing for questions.' },
+        { kind: 'dictation', text: 'Going forward, it might help to write down three questions.' },
+        { kind: 'dictation', text: 'Would you like to rehearse the next one with me?' },
+        { kind: 'dictation', text: "Thank you for telling me. I didn't realise that." },
+        { kind: 'dictation', text: "Let's check in every two weeks." },
+        { kind: 'dictation', text: 'Thanks, that means a lot.' },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: give and receive feedback',
+      minutes: 12,
+      items: [
+        { kind: 'shadow', text: "I'd like to share some feedback, and then hear yours." },
+        { kind: 'shadow', text: 'Something I really appreciated was how you explained the bug.' },
+        { kind: 'shadow', text: 'Going forward, it might help to prepare three likely questions.' },
+        { kind: 'shadow', text: "Thank you for telling me. I didn't realise that." },
+        {
+          kind: 'speak',
+          situation: 'Give positive feedback to a colleague using SBI (situation, behaviour, impact).',
+          keywords: ['in', 'you', 'that'],
+          sample: "In yesterday's incident call, you stayed calm and wrote a clear timeline. That helped everyone understand what was happening.",
+        },
+        {
+          kind: 'speak',
+          situation: 'Give developmental feedback: a colleague often pushes big PRs without description. Be specific and future-focused.',
+          keywords: ['one thing I noticed', 'going forward'],
+          sample: "One thing I noticed is that your last three PRs had no description, so reviews took longer. Going forward, could you add a short summary and test steps?",
+        },
+        {
+          kind: 'speak',
+          situation: 'You receive critical feedback: "Your meetings often run over time." Respond professionally.',
+          keywords: ['thank you for', "that's fair"],
+          sample: "Thank you for telling me. That's fair, last week's retro ran twenty minutes over. I'll use a timer and a clear agenda from now on.",
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: review notes',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: "Write Nina's performance review notes: two strengths (SBI), one area to work on (SBI), a growth plan with goals, and the feedback you received.",
+          checklist: [
+            'Specific situations and behaviours (Past Simple)',
+            'Impact for each point',
+            'Future-focused suggestions (*might help to, going forward*)',
+            'Goals and check-ins',
+          ],
+          minWords: 70,
+          sample:
+            "Performance review: Nina, Junior Developer\nStrengths: In last week's incident, Nina found the upload bug and explained it clearly to the team, which saved us several hours. In the chat feature, she wrote tests for every edge case, so we had no bugs after release.\nArea to work on: In Tuesday's sprint review, she skipped the edge cases in the demo, and the client had to ask twice. Going forward, it might help to prepare three likely questions before each demo.\nGrowth plan: lead one demo per sprint; rehearse with me first. We will check in every two weeks.\nFeedback for me: avoid late-evening PR reviews. Agreed.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
