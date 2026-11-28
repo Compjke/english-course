@@ -1,0 +1,206 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b2p-13',
+  level: 'B2+',
+  title: 'Day 98: Talking about your wins without bragging',
+  grammar: 'Self-promotion: impact language, quantifying, crediting others, confident but modest phrasing',
+  scene: 'Ты пишешь promotion packet — документ о своих достижениях для комиссии.',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: the promotion packet',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Review with Maya',
+          format: 'doc',
+          lines: [
+            { who: 'You', text: "Draft: 'I helped a bit with the German launch and did some work on performance.'" },
+            { who: 'Maya', text: "Far too modest. The committee will think you were a passenger. What exactly did you do, and what changed because of it?" },
+            { who: 'You', text: "I led the German launch, designed the phased rollout, and introduced the route cache. Latency dropped by 80%." },
+            { who: 'Maya', text: "Much better. Now write it: 'I led… which resulted in…'. Lead with impact." },
+            { who: 'You', text: "Doesn't that sound like bragging?" },
+            { who: 'Maya', text: "Not if it's factual and you credit others. For example: 'Together with Arjun, I designed…' or 'Lena's field tests were key to…'." },
+            { who: 'You', text: "OK: 'I led the German launch across five depots. Working closely with Arjun and Ken, I designed a phased rollout, which kept the impact of the Munich outage to 4% of deliveries.'" },
+            { who: 'Maya', text: "That's it. Specific, quantified, and generous to the team. Do the same for mentoring Nina." },
+          ],
+        },
+        { kind: 'choice', prompt: 'What was wrong with the first draft?', options: ['Far too modest and vague', 'Too long', 'Wrong facts', 'Too much bragging'], answer: 0 },
+        { kind: 'choice', prompt: 'What does "lead with impact" mean?', options: ['Start with what you did and what changed', 'Start with your title', 'Start with a joke', 'Start with problems'], answer: 0 },
+        { kind: 'choice', prompt: 'How to avoid sounding like bragging?', options: ['Be factual and credit others', 'Never mention yourself', 'Exaggerate', 'Only talk about others'], answer: 0 },
+        { kind: 'choice', prompt: 'How much did latency drop?', options: ['8%', '18%', '80%', '100%'], answer: 2 },
+        { kind: 'choice', prompt: 'What should you write about next?', options: ['Mentoring Nina', 'Your holiday', 'Office plants', 'Your salary'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Language: confident and fair',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'From modest to impactful',
+          table: [
+            ['Too modest (weak)', 'Impactful (strong)'],
+            ['I helped a bit with…', 'I **led** / **drove** / **owned**…'],
+            ['I did some work on performance.', 'I **introduced** a cache, **which reduced** latency by 80%.'],
+            ['I was involved in hiring.', 'I **interviewed** 12 candidates and **hired** two engineers.'],
+            ['I tried to help Nina.', 'I **mentored** Nina, **who was promoted** to Junior Developer after six months.'],
+          ],
+          body:
+            'Formula: **Strong verb + what + result (number)**. *I led X, which resulted in Y.* / *By + -ing, I reduced…*\n\n' +
+            'Use **Past Simple** for completed achievements, **Present Perfect** for the overall record (*I have led three launches*).',
+        },
+        {
+          kind: 'theory',
+          title: 'Crediting others without disappearing',
+          body:
+            'Show teamwork **and** your role:\n*Together with Arjun, I designed…*\n*Working closely with Ken, I…*\n*Lena’s field tests were key to…; based on them, I…*\n*The team delivered X; my part was to…*\n\n' +
+            'Avoid two extremes: *I did everything myself* (arrogant) and *The team did it, I just helped* (invisible).\n\n' +
+            'Confident but modest phrases: *I’m proud of… / I’m particularly pleased with… / One achievement I’d highlight is…*',
+          pitfalls: [
+            { wrong: 'I helped a little bit with the launch, maybe.', right: 'I led the German launch across five depots.' },
+            { wrong: 'I did everything myself, the team just followed.', right: 'Working closely with the team, I designed…' },
+            { wrong: 'By introduce a cache, I reduced latency.', right: 'By introducing a cache, I reduced latency.' },
+            { wrong: 'It resulted to an 80% drop.', right: 'It resulted in an 80% drop.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'Strongest sentence:', options: ['I led the German launch across five depots.', 'I helped with the launch.', 'I was there during the launch.', 'The launch happened.'], answer: 0 },
+        { kind: 'choice', prompt: 'I introduced a cache, ___ latency by 80%.', options: ['which reduced', 'that it reduced', 'what reduced', 'reducing it'], answer: 0 },
+        { kind: 'choice', prompt: 'By ___ a phased rollout, I limited the impact.', options: ['design', 'designing', 'designed', 'to design'], answer: 1 },
+        { kind: 'choice', prompt: 'It resulted ___ a 30% drop in disputes.', options: ['to', 'in', 'on', 'at'], answer: 1 },
+        { kind: 'choice', prompt: 'Crediting others well:', options: ['Working closely with Ken, I designed the failover.', 'Ken did nothing.', 'I did it alone.', 'Ken did everything, not me.'], answer: 0 },
+        { kind: 'choice', prompt: 'Confident but modest:', options: ["One achievement I'd highlight is mentoring Nina.", "I'm the best mentor ever.", 'I did nothing special.', 'Nina did it herself.'], answer: 0 },
+        { kind: 'choice', prompt: 'Overall record (Present Perfect):', options: ['I have led three launches.', 'I led three launches yesterday.', 'I lead three launches ago.', 'I am leading three launches since.'], answer: 0 },
+        { kind: 'choice', prompt: '"I was involved in hiring" → stronger:', options: ['I interviewed 12 candidates and hired two engineers.', 'I was very involved in hiring.', 'Hiring involved me.', 'I liked hiring.'], answer: 0 },
+        { kind: 'gap', text: 'I ___ the German launch. (was the leader, past)', answers: ['led'] },
+        { kind: 'gap', text: 'I mentored Nina, ___ was promoted after six months.', answers: ['who'] },
+        { kind: 'gap', text: '___ with Arjun, I designed the event bus migration.', answers: ['Together'] },
+        { kind: 'gap', text: "Lena's field tests were ___ to finding the tunnel bug.", answers: ['key', 'crucial'] },
+        { kind: 'gap', text: "I'm particularly ___ with the result.", answers: ['pleased', 'happy'] },
+        { kind: 'gap', text: 'By ___ (automate) onboarding, I cut setup time from two weeks to two days.', answers: ['automating'] },
+        { kind: 'gap', text: 'I have ___ (mentor) three junior developers so far.', answers: ['mentored'] },
+        { kind: 'transform', instruction: 'Make it impactful (verb + result)', source: 'I did some work on the CI.', answers: ['I parallelised the CI, which reduced build time from 25 to 8 minutes.', 'I sped up the CI, which reduced build time by 70%.', 'I optimised the CI, which reduced build time from 25 to 8 minutes.'] },
+        { kind: 'transform', instruction: 'Credit others and keep your role', source: 'I designed the failover. (Ken helped a lot.)', answers: ['Working closely with Ken, I designed the failover.', 'Together with Ken, I designed the failover.'] },
+        { kind: 'transform', instruction: 'Rewrite with "By + -ing"', source: 'I introduced photo proof. Disputes dropped by 30%.', answers: ['By introducing photo proof, I reduced disputes by 30%.', 'By introducing photo proof, we reduced disputes by 30%.'] },
+        { kind: 'fix', sentence: 'By automate the setup, I saved two weeks per depot.', answers: ['By automating the setup, I saved two weeks per depot.'] },
+        { kind: 'fix', sentence: 'It resulted to fewer incidents.', answers: ['It resulted in fewer incidents.'] },
+        { kind: 'fix', sentence: 'I mentored Nina, which was promoted.', answers: ['I mentored Nina, who was promoted.'] },
+        { kind: 'fix', sentence: 'I have led the launch last year.', answers: ['I led the launch last year.'] },
+        { kind: 'fix', sentence: 'Working close with Ken, I designed it.', answers: ['Working closely with Ken, I designed it.'] },
+        { kind: 'order', words: ['I', 'led', 'the', 'launch', 'across', 'five', 'depots', '.'], ru: 'Я руководил запуском в пяти депо.' },
+        { kind: 'order', words: ['It', 'resulted', 'in', 'an', '80%', 'drop', '.'], ru: 'Это привело к падению на 80%.' },
+        { kind: 'order', words: ['Working', 'closely', 'with', 'Ken', ',', 'I', 'designed', 'it', '.'], ru: 'Тесно работая с Ken, я это спроектировал.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: achievements',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'promotion packet', ru: 'пакет документов на повышение', example: "I'm writing my promotion packet." },
+            { chunk: 'committee', ru: 'комиссия', example: 'The committee meets next month.' },
+            { chunk: 'passenger', ru: 'пассажир (не участник)', example: "They'll think you were a passenger." },
+            { chunk: 'lead with impact', ru: 'начинать с результата', example: 'Always lead with impact.' },
+            { chunk: 'quantify', ru: 'выразить в цифрах', example: 'Quantify every achievement.' },
+            { chunk: 'brag', ru: 'хвастаться', example: "It's not bragging if it's factual." },
+            { chunk: 'drove', ru: 'продвигал, вёл', example: 'I drove the migration project.' },
+            { chunk: 'owned', ru: 'отвечал за', example: 'I owned the release process.' },
+            { chunk: 'cross-team', ru: 'межкомандный', example: 'It was a cross-team project.' },
+            { chunk: 'scope of influence', ru: 'сфера влияния', example: 'My scope of influence grew this year.' },
+            { chunk: 'generous', ru: 'щедрый', example: 'Be generous with credit.' },
+            { chunk: 'highlight', ru: 'выделить, подчеркнуть', example: "One achievement I'd highlight is mentoring." },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['brag', 'хвастаться'],
+            ['quantify', 'выразить в цифрах'],
+            ['highlight', 'выделить'],
+            ['committee', 'комиссия'],
+            ['cross-team', 'межкомандный'],
+          ],
+        },
+        { kind: 'gap', text: 'Always ___ your results: percentages, hours, money.', answers: ['quantify'] },
+        { kind: 'gap', text: "It isn't ___ if it's factual and you credit others.", answers: ['bragging'] },
+        { kind: 'gap', text: 'Be ___ with credit to your team.', answers: ['generous'] },
+        { kind: 'gap', text: 'I ___ the migration from start to finish. (drove)', answers: ['drove', 'led', 'owned'] },
+        { kind: 'gap', text: 'The promotion ___ reviews packets in March.', answers: ['committee'] },
+        { kind: 'choice', prompt: 'Best way to describe your achievement for promotion:', options: ['Strong verb + what you did + measurable result + credit to others', 'Only "we", never "I"', 'Only "I", never the team', 'Long story without numbers'], answer: 0 },
+        { kind: 'choice', prompt: 'Senior-level impact usually means…', options: ['impact beyond your own tasks: team, other teams, the business', 'writing the most code', 'working the longest hours', 'knowing the most tools'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'Far too modest. What exactly did you do?' },
+        { kind: 'dictation', text: 'I led the German launch and introduced the route cache.' },
+        { kind: 'dictation', text: 'Latency dropped by eighty percent.' },
+        { kind: 'dictation', text: 'Lead with impact.' },
+        { kind: 'dictation', text: "It isn't bragging if it's factual and you credit others." },
+        { kind: 'dictation', text: 'Working closely with Arjun and Ken, I designed a phased rollout.' },
+        { kind: 'dictation', text: 'By introducing photo proof, we reduced disputes by thirty percent.' },
+        { kind: 'dictation', text: "One achievement I'd highlight is mentoring Nina." },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: present your wins',
+      minutes: 14,
+      items: [
+        { kind: 'shadow', text: 'I led the German launch across five depots.' },
+        { kind: 'shadow', text: 'Working closely with Arjun and Ken, I designed a phased rollout.' },
+        { kind: 'shadow', text: 'By introducing a route cache, I reduced latency by eighty percent.' },
+        { kind: 'shadow', text: "One achievement I'd highlight is mentoring Nina, who was promoted after six months." },
+        {
+          kind: 'speak',
+          situation: 'Describe your biggest achievement of the year with a strong verb, a number and credit to the team.',
+          keywords: ['I led', 'which', 'working closely with'],
+          sample: "I led the migration of our payment system, which reduced failed payments by 40%. Working closely with the QA team, I designed a zero-downtime rollout.",
+        },
+        {
+          kind: 'speak',
+          situation: 'Talk about mentoring or helping others grow, with a concrete result.',
+          keywords: ['I mentored', 'who'],
+          sample: "I mentored two junior developers, who now own the checkout module on their own. I also started weekly code review sessions, which the whole team now uses.",
+        },
+        {
+          kind: 'speak',
+          situation: 'The interviewer says: "That sounds like a team effort. What was your personal contribution?" Answer clearly.',
+          keywords: ['the team', 'my part was'],
+          sample: "Yes, the team delivered it together. My part was to design the rollout strategy, negotiate the scope with the client, and lead the incident response when Munich went down.",
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: promotion packet',
+      minutes: 10,
+      items: [
+        {
+          kind: 'write',
+          task: 'Write the "Key achievements" section of your promotion packet: 4 bullet points (delivery, technical, people, cross-team), each with a strong verb, a number, and credit where it is due.',
+          checklist: [
+            'Strong verbs: led, designed, introduced, mentored',
+            'A number in every bullet',
+            'Credit to colleagues (*Working closely with…*)',
+            'Confident, factual tone (no exaggeration)',
+          ],
+          minWords: 90,
+          sample:
+            "Key achievements\n- Delivery: I led the German launch across five depots. Working closely with Arjun and Ken, I designed a phased rollout, which limited the Munich outage to 4% of deliveries. The client extended the contract to two more countries.\n- Technical: I introduced a route cache, which reduced latency for German depots by 80%, and I wrote the RFC for event-driven sync, which cut SAP load by 85%.\n- People: I mentored Nina, who was promoted to Junior Developer after six months, and I set up a shared on-call rotation, reducing Ken's weekend shifts from four to one per month.\n- Cross-team: I ran the Q1 planning workshop with three teams and the client, which produced an agreed roadmap in one session.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
