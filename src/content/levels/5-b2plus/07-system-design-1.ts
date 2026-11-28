@@ -1,0 +1,212 @@
+import type { Lesson } from '../../../engine/types';
+
+const lesson: Lesson = {
+  id: 'b2p-07',
+  level: 'B2+',
+  title: 'Day 92: Let me clarify the requirements',
+  grammar: 'System design talk 1: clarifying questions, assumptions, thinking aloud, trade-offs',
+  scene: 'Пробное system design интервью с Arjun: «Спроектируй сервис трекинга посылок».',
+  stages: [
+    {
+      kind: 'episode',
+      title: 'Episode: mock system design',
+      minutes: 10,
+      items: [
+        {
+          kind: 'dialogue',
+          title: 'Mock system design interview',
+          format: 'call',
+          lines: [
+            { who: 'Arjun', text: "Design a parcel tracking service for a national courier company." },
+            { who: 'You', text: "Before I start, let me clarify the requirements. Who are the main users: customers, drivers, or both?" },
+            { who: 'Arjun', text: "Mainly customers checking their parcel status. Drivers send updates." },
+            { who: 'You', text: "How many parcels per day are we talking about, and how fresh does the status need to be?" },
+            { who: 'Arjun', text: "About two million parcels a day. Updates within a minute are fine." },
+            { who: 'You', text: "OK, so I'll assume around 20 million status updates a day and a read-heavy workload: customers check far more often than drivers write. Is that a fair assumption?" },
+            { who: 'Arjun', text: "Yes. Go on." },
+            { who: 'You', text: "I'm thinking out loud here: since reads dominate, I'd put a cache in front of the database. The trade-off is that customers might see a status that's up to a minute old, which you said is acceptable." },
+            { who: 'Arjun', text: "Why not write directly to the database from the driver app?" },
+            { who: 'You', text: "We could, but I'd rather put a queue in between. That way, a spike in driver updates won't overload the database. The downside is a bit more complexity." },
+            { who: 'Arjun', text: "Good. You clarified first, stated assumptions and explained trade-offs. That's what we look for." },
+          ],
+        },
+        { kind: 'choice', prompt: 'What do you do first?', options: ['Clarify the requirements', 'Draw the database', 'Write code', 'Choose Kubernetes'], answer: 0 },
+        { kind: 'choice', prompt: 'How many parcels per day?', options: ['200,000', 'About two million', '20 million', '2 billion'], answer: 1 },
+        { kind: 'choice', prompt: 'What kind of workload is it?', options: ['Read-heavy', 'Write-heavy', 'Balanced', 'Offline'], answer: 0 },
+        { kind: 'choice', prompt: 'What is the trade-off of the cache?', options: ['Status may be up to a minute old', 'It is expensive', 'It loses data', 'No trade-off'], answer: 0 },
+        { kind: 'choice', prompt: 'Why a queue between drivers and the database?', options: ["Spikes in updates won't overload the database", 'It is faster to code', 'Arjun likes queues', 'No reason'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'grammar',
+      title: 'Language: system design communication',
+      minutes: 22,
+      items: [
+        {
+          kind: 'theory',
+          title: 'The flow of a system design interview',
+          body:
+            'Interviewers judge **how you think and communicate**, not only the final diagram. A typical flow:\n' +
+            '1. **Clarify requirements**: *Before I start, let me clarify… Who are the users? How many…? How fresh does… need to be?*\n' +
+            '2. **State assumptions**: *I’ll assume… / Let’s say… / Is that a fair assumption?*\n' +
+            '3. **Estimate scale**: *That gives us roughly… requests per second.*\n' +
+            '4. **Think aloud**: *I’m thinking out loud here… / My first idea is… / One option would be…*\n' +
+            '5. **Explain trade-offs**: *The trade-off is… / The downside is… / That way, … / We could…, but I’d rather…*',
+        },
+        {
+          kind: 'theory',
+          title: 'Grammar in design talk',
+          table: [
+            ['Function', 'Grammar', 'Example'],
+            ['assumption', "I'll assume + clause", "**I'll assume** reads dominate."],
+            ['hypothetical design', "I'd + verb", "**I'd put** a cache in front of the DB."],
+            ['options', 'could / might', 'We **could** write directly, but…'],
+            ['preference', "I'd rather + verb", "**I'd rather** use a queue."],
+            ['consequence', 'That way, + will', "That way, spikes **won't** overload the DB."],
+            ['condition', 'if / as long as', 'That works **as long as** staleness is acceptable.'],
+          ],
+          body: 'Using **would** shows you are designing and exploring; using **will** too early sounds like you are not open to alternatives.',
+          pitfalls: [
+            { wrong: 'I will use Kafka. (first sentence)', right: 'Before I start, let me clarify the requirements.' },
+            { wrong: "I'd rather to use a queue.", right: "I'd rather use a queue." },
+            { wrong: 'How fresh the status needs to be?', right: 'How fresh does the status need to be?' },
+            { wrong: 'The trade-off is that is more complex.', right: 'The trade-off is that it is more complex.' },
+          ],
+        },
+        { kind: 'choice', prompt: 'Best first sentence in a system design interview:', options: ['Before I start, let me clarify the requirements.', 'I will use microservices.', 'Kubernetes!', 'Let me write code.'], answer: 0 },
+        { kind: 'choice', prompt: 'Stating an assumption:', options: ["I'll assume a read-heavy workload. Is that fair?", 'It is read-heavy, obviously.', 'Whatever.', 'I know it is read-heavy.'], answer: 0 },
+        { kind: 'choice', prompt: '___ put a cache in front of the database.', options: ["I'd", "I'll definitely", 'I am', 'I do'], answer: 0 },
+        { kind: 'choice', prompt: "I'd rather ___ a queue in between.", options: ['put', 'to put', 'putting', 'puts'], answer: 0 },
+        { kind: 'choice', prompt: 'That way, a spike ___ overload the database.', options: ["won't", "doesn't will", "not", "isn't"], answer: 0 },
+        { kind: 'choice', prompt: 'How fresh ___ the status need to be?', options: ['does', 'is', 'do', 'has'], answer: 0 },
+        { kind: 'choice', prompt: 'Thinking aloud:', options: ["I'm thinking out loud here: since reads dominate…", 'Shh, let me think silently for 5 minutes.', 'I know the answer.', 'Next.'], answer: 0 },
+        { kind: 'choice', prompt: 'Explaining a downside:', options: ['The downside is a bit more complexity.', 'There is no downside.', 'It is perfect.', 'Bad.'], answer: 0 },
+        { kind: 'gap', text: 'Before I start, let me ___ the requirements.', answers: ['clarify'] },
+        { kind: 'gap', text: "Is that a ___ assumption?", answers: ['fair', 'reasonable'] },
+        { kind: 'gap', text: 'The ___ -off is that data might be a minute old.', answers: ['trade'] },
+        { kind: 'gap', text: "We ___ write directly, but I'd rather use a queue.", answers: ['could'] },
+        { kind: 'gap', text: 'That gives us ___ 250 requests per second. (approximately)', answers: ['roughly', 'about', 'around', 'approximately'] },
+        { kind: 'gap', text: 'That works as ___ as a one-minute delay is acceptable.', answers: ['long'] },
+        { kind: 'gap', text: "I'm thinking out ___ here.", answers: ['loud'] },
+        { kind: 'transform', instruction: 'Make it a clarifying question', source: 'Users? Customers or drivers?', answers: ['Who are the main users: customers, drivers, or both?', 'Who are the main users, customers or drivers?'] },
+        { kind: 'transform', instruction: 'Make it an assumption + check', source: 'Reads dominate.', answers: ["I'll assume reads dominate. Is that a fair assumption?", "I'll assume that reads dominate. Is that fair?"] },
+        { kind: 'transform', instruction: 'Express a design preference with a reason', source: 'Use a queue. Spikes are a problem.', answers: ["I'd rather use a queue. That way, spikes won't overload the database.", "I'd use a queue, so that spikes won't overload the database."] },
+        { kind: 'fix', sentence: 'How many parcels per day we talk about?', answers: ['How many parcels per day are we talking about?'] },
+        { kind: 'fix', sentence: "I'd rather to keep it simple.", answers: ["I'd rather keep it simple."] },
+        { kind: 'fix', sentence: 'The trade-off is that is slower.', answers: ['The trade-off is that it is slower.', "The trade-off is that it's slower."] },
+        { kind: 'fix', sentence: "I'll assume that it read-heavy.", answers: ["I'll assume that it's read-heavy.", "I'll assume that it is read-heavy."] },
+        { kind: 'fix', sentence: "That way, the database won't overloaded.", answers: ["That way, the database won't be overloaded."] },
+        { kind: 'order', words: ['Let', 'me', 'clarify', 'the', 'requirements', '.'], ru: 'Позвольте уточнить требования.' },
+        { kind: 'order', words: ['Is', 'that', 'a', 'fair', 'assumption', '?'], ru: 'Это разумное допущение?' },
+        { kind: 'order', words: ['The', 'trade-off', 'is', 'some', 'staleness', '.'], ru: 'Цена — некоторая неактуальность данных.' },
+      ],
+    },
+    {
+      kind: 'vocab',
+      title: 'Vocabulary: system design 1',
+      minutes: 10,
+      items: [
+        {
+          kind: 'vocabList',
+          words: [
+            { chunk: 'requirements', ru: 'требования', example: 'Let me clarify the requirements.' },
+            { chunk: 'read-heavy', ru: 'с преобладанием чтения', example: 'The workload is read-heavy.' },
+            { chunk: 'write-heavy', ru: 'с преобладанием записи', example: 'Logging is write-heavy.' },
+            { chunk: 'requests per second', ru: 'запросов в секунду', example: 'That is about 250 requests per second.' },
+            { chunk: 'staleness', ru: 'устаревание данных', example: 'One minute of staleness is fine.' },
+            { chunk: 'in front of', ru: 'перед', example: 'Put a cache in front of the database.' },
+            { chunk: 'spike', ru: 'всплеск', example: 'A spike in traffic.' },
+            { chunk: 'downside', ru: 'недостаток', example: 'The downside is complexity.' },
+            { chunk: 'back-of-the-envelope', ru: 'прикидочный (расчёт)', example: 'A back-of-the-envelope estimate is enough.' },
+            { chunk: 'functional requirements', ru: 'функциональные требования', example: 'Start with functional requirements.' },
+            { chunk: 'thinking out loud', ru: 'рассуждать вслух', example: "I'm thinking out loud here." },
+            { chunk: 'fair assumption', ru: 'разумное допущение', example: 'Is that a fair assumption?' },
+          ],
+        },
+        {
+          kind: 'match',
+          pairs: [
+            ['read-heavy', 'с преобладанием чтения'],
+            ['spike', 'всплеск'],
+            ['staleness', 'устаревание данных'],
+            ['downside', 'недостаток'],
+            ['back-of-the-envelope', 'прикидочный'],
+          ],
+        },
+        { kind: 'gap', text: 'A quick back-of-the-___ calculation gives 250 RPS.', answers: ['envelope'] },
+        { kind: 'gap', text: 'Black Friday creates a huge ___ in traffic.', answers: ['spike'] },
+        { kind: 'gap', text: 'Logs are write-___ .', answers: ['heavy'] },
+        { kind: 'gap', text: 'Put a cache in ___ of the database.', answers: ['front'] },
+        { kind: 'gap', text: 'Start with the functional ___ .', answers: ['requirements'] },
+        { kind: 'choice', prompt: '2 million parcels a day × 10 updates ≈ … per second', options: ['about 230', 'about 23', 'about 2,300', 'about 23,000'], answer: 0 },
+        { kind: 'choice', prompt: 'Interviewers in system design value most…', options: ['clear reasoning and trade-offs', 'the perfect final diagram', 'knowing every tool name', 'speed'], answer: 0 },
+      ],
+    },
+    {
+      kind: 'listening',
+      title: 'Listening & spelling',
+      minutes: 10,
+      items: [
+        { kind: 'dictation', text: 'Before I start, let me clarify the requirements.' },
+        { kind: 'dictation', text: 'How many parcels per day are we talking about?' },
+        { kind: 'dictation', text: "I'll assume a read-heavy workload. Is that a fair assumption?" },
+        { kind: 'dictation', text: "I'm thinking out loud here." },
+        { kind: 'dictation', text: "I'd put a cache in front of the database." },
+        { kind: 'dictation', text: "The trade-off is that the status might be a minute old." },
+        { kind: 'dictation', text: "We could, but I'd rather put a queue in between." },
+        { kind: 'dictation', text: "That way, a spike won't overload the database." },
+      ],
+    },
+    {
+      kind: 'speaking',
+      title: 'Speaking: design out loud',
+      minutes: 14,
+      items: [
+        { kind: 'shadow', text: 'Before I start, let me clarify the requirements.' },
+        { kind: 'shadow', text: "I'll assume a read-heavy workload. Is that a fair assumption?" },
+        { kind: 'shadow', text: "I'd put a cache in front of the database. The trade-off is some staleness." },
+        { kind: 'shadow', text: "We could write directly, but I'd rather use a queue." },
+        {
+          kind: 'speak',
+          situation: 'Task: "Design a URL shortener." Ask three clarifying questions before designing.',
+          keywords: ['let me clarify', 'how many', 'do we need'],
+          sample: "Before I start, let me clarify a few things. How many new links per day do we expect? How long should links live? And do we need analytics, like click counts?",
+        },
+        {
+          kind: 'speak',
+          situation: 'State two assumptions about scale and check them.',
+          keywords: ["I'll assume", 'fair assumption'],
+          sample: "I'll assume about 100 million redirects a day and ten times more reads than writes. Is that a fair assumption?",
+        },
+        {
+          kind: 'speak',
+          situation: 'Propose one design decision and explain its trade-off.',
+          keywords: ["I'd", 'the trade-off is'],
+          sample: "I'd store links in a key-value database and cache the popular ones. The trade-off is that analytics would be slightly delayed, but redirects would be very fast.",
+        },
+      ],
+    },
+    {
+      kind: 'writing',
+      title: 'Writing: design notes',
+      minutes: 8,
+      items: [
+        {
+          kind: 'write',
+          task: 'Write the first part of design notes for the parcel tracking service: requirements, assumptions, rough scale, and two design decisions with trade-offs.',
+          checklist: [
+            'Clarified requirements (users, freshness)',
+            'Assumptions with numbers',
+            "Decisions with *I'd / we could… but*",
+            'A trade-off for each decision',
+          ],
+          minWords: 80,
+          sample:
+            "Parcel tracking service: design notes\nRequirements: customers check parcel status; drivers send updates. About two million parcels a day; status may be up to one minute old.\nAssumptions: around ten updates per parcel, so roughly 20 million writes a day (about 230 per second, with peaks of maybe 2,000). Reads dominate: about ten reads per write.\nDecision 1: a cache in front of the database for status reads. Trade-off: customers might see a status up to a minute old, which is acceptable.\nDecision 2: a queue between the driver app and the database. That way, spikes won't overload the database. Trade-off: more moving parts to operate.",
+        },
+      ],
+    },
+  ],
+};
+
+export default lesson;
